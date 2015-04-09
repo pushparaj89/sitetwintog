@@ -1,0 +1,21 @@
+all:
+  protected: false
+  allowed: [127.0.0.1]
+  protectedRoute: secure
+  services:
+    user:
+      model:  sfGuardUser
+      methodForQuery: ~
+      states: ~
+    userInReverseOrder:
+      model:  sfGuardUser
+      methodForQuery: getDesc
+      states: ~
+    user405:
+      model:  sfGuardUser
+      methodForQuery: ~
+      states: [post]
+    nonActiveModel:
+      model:  non_active_model
+      methodForQuery: ~
+      states: ~

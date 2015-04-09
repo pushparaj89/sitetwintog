@@ -1,0 +1,5 @@
+Gallery:
+  actAs: [Timestampable]
+  columns:
+    image_title: {type: string(255)}
+    image_url :  {type: string(255)}

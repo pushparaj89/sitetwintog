@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+<?php
+
+/**
+* sfDecoratorPluginConfiguration class
+*/
+class sfDecoratorPluginConfiguration extends sfPluginConfiguration
+{
+  public function configure()
+  {
+    // class might not be loaded yet, force the load
+    require_once(dirname(__FILE__).'/../lib/sfDecoratorAutoload.class.php');
+    
+    sfDecoratorAutoload::getInstance()->register($this->configuration);
+  } 
+}
+=======
+<?php
+
+/**
+* sfDecoratorPluginConfiguration class
+*/
+class sfDecoratorPluginConfiguration extends sfPluginConfiguration
+{
+  public function configure()
+  {
+    // class might not be loaded yet, force the load
+    require_once(dirname(__FILE__).'/../lib/sfDecoratorAutoload.class.php');
+    
+    sfDecoratorAutoload::getInstance()->register($this->configuration);
+  } 
+}
+>>>>>>> 42e64223494da6aa9e9f335f2b36da43fa53e08e

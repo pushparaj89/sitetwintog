@@ -1,0 +1,15 @@
+cache/*
+log/*
+web/uploads/*
+nbproject/*
+nbproject/*
+config/databases.yml
+web/forum/cache/*
+web/forum/admin/sources/loginauth/external/conf.php
+web/forum/conf_global.php
+*.idea
+*.settings
+*.buildpath
+*.project
+*DS_Store
+/src/plugins/.registry/

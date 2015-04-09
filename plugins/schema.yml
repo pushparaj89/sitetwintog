@@ -1,0 +1,1125 @@
+#Trainee Models
+Trainee:
+  inheritance: {type: concrete, extends: sfGuardUser}
+  actAs: [GSATrainable, GSARegionable, Commentable, GSALoggable]
+  columns:
+    prefix: {type: string(255), default: 'Dr'}
+    set_level: {type: enum, values:[1,2], default: '1'}
+    training_start_date: {type: date}
+    training_end_date: {type: date}
+    training_max_date: {type: date}
+    #training_completed: {type: enum, values: [yes, no], default: no}
+    training_status: {type: enum, values: [Completed, Dismissed, Active, Withdrawn, Exam Pending, Fellowship Pending, Active - Part-time], default: Active}
+    reason: { type: enum, values: [Performance, Academic Misconduct, SET1 requirements not completed, Specialty, 'Personal'] }
+    hub_id: {type: integer} 
+  relations:
+    Hub: {class: Hubs, local: hub_id, foreign: id, type: one, foreignType: many, foreignAlias: Trainee}
+  indexes:
+    training_status_idx:
+      fields:
+        training_status:
+          sorting: ASC
+
+TraineeProfile:
+  actAs: [Timestampable, GSALoggable]
+  columns: 
+    photo: {type: string(255), default: 'default.png'}
+    pref_name: {type: string(255), notnull: true}
+    birth_date: {type: date}
+    gender: {type: enum, values: [Female , Male], default: Female}
+    phone:  {type: string(24)}
+    mobile:  {type: string(24)}
+    fax:  {type: string(24)}
+    website:
+      type: string(255)
+
+    address1:  {type: string(255)}
+    address2:  {type: string(255)}
+    suburb:  {type: string(48)}
+    postcode:  {type: string(24)}
+    state:  {type: enum, values: [ACT,NSW,NT,QLD,SA,TAS,VIC,WA,OTHER], default: VIC}
+    country: {type: string(255), notnull: true}
+    trainee_id: {type: integer}
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: one, foreignAlias: Profile, onDelete: CASCADE}
+
+ImgTrainee:
+  inheritance: {type: concrete, extends: sfGuardUser}
+  actAs: [Timestampable, GSARegionable, Commentable]
+  columns:    
+    prefix: {type: string(255), default: 'Dr'}    
+    validity_date: {type: date}    
+    expiry_date: {type: date}
+    status: {type: enum, values: [Completed, Active, Interruption, Position Pending, Exam Pending, Fellowship Pending, Reassessed as Not Comparable, Expired Validity Date, Expired], default: Active}
+    recommendation: {type: enum, values: [Partially Comparable, Substantially Comparable], default: Partially comparable}
+    article: {type: enum, values: [Examination, Assessment], default: Examination}
+    pathway: {type: enum, values: [24 months, 12 months], default: 24 months}
+    
+ImgTraineeProfile:
+  actAs: [Timestampable]
+  columns:
+    photo: {type: string(255), default: 'default.png'}
+    salutation: {type: string(255)}
+    pref_name: {type: string(255), notnull: true}
+    birth_date: {type: date}
+    gender: {type: enum, values: [Female , Male], default: Female}
+    phone:  {type: string(24)}
+    mobile:  {type: string(24)}
+    fax:  {type: string(24)}
+    website: {type: string(255)}
+    address1:  {type: string(255)}
+    address2:  {type: string(255)}
+    suburb:  {type: string(48)}
+    postcode:  {type: string(24)}
+    state:  {type: enum, values: [ACT,NSW,NT,QLD,SA,TAS,VIC,WA,OTHER], default: VIC}
+    country: {type: string(255), notnull: true}
+    imgtrainee_id: {type: integer}
+  relations:
+    ImgTrainee: {class: ImgTrainee, local: imgtrainee_id, foreign: id, type: one, foreignType: one, foreignAlias: Profile, onDelete: CASCADE}
+    
+Terms:
+  actAs: [Timestampable, GSATermable, GSALoggable]
+  columns:
+    trainee_id: {type: integer, notblank: true}
+    term_start_date: {type: date, notblank: true}
+    term_end_date: {type: date}
+    term_type: {type: enum, values: ['Part-time Training', 'Full-time training'], default: 'Full-time training'}
+    status: {type: enum, values: ['N/A', Active, Part-time Training, Exam Pending, Research requirement, Unsatisfactory - performance, Unsatisfactory - form not returned, Not accessible, Overseas training, RPL, Probation, Completed, Deceased, Withdrawal, Dismissed, Interruption, Deferral], default: 'N/A'}
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: Terms, onDelete: CASCADE}
+  indexes:
+    term_status:
+      fields:
+        status:
+          sorting: ASC
+Rotations:
+  actAs: [Timestampable, GSARotationable, Commentable, GSALoggable]
+  columns:
+    term_id: {type: integer}
+    term_type: {type: enum, values: ['Surgical', 'Research', 'Interruption', 'Anatomy Demonstrator'], default: 'Surgical'}
+    term_type: {type: string(50), default: 'Surgical'}
+    post_id: {type: integer}
+    rotation_start_date: {type: date}
+    rotation_end_date: {type: date}
+    status: {type: enum, values: ['N/A', Active, Active Part Time, Exam Pending, Research, Probation, Complete, Deceased, Withdrawn, Dismissed, Interruption], default: 'Active'}
+  relations:
+    Terms: {class: Terms, local: term_id, foreign: id, type: one, foreignType: many, foreignAlias: Rotations, onDelete: CASCADE}
+    Posts: {class: Posts, local: post_id, foreign: id, type: one, foreignType: many, foreignAlias: Rotations}
+  indexes:
+    rotation_status:
+      fields:
+        status:
+          sorting: ASC
+Assessments:
+  actAs: [Timestampable, Commentable, Attachable,GSALoggable,GSAMessagable]
+  columns:
+    rotation_id: {type: integer}
+    set_level: {type: integer}
+    #term_year: {type: integer}
+    term: {type: integer}
+    term_type: {type: enum, values: [Surgical, Research, Interruption, Anatomy Demonstrator]}
+    #hospital_name: {type: integer}
+    two_rotations_per_terms: {type: enum, values: [Yes, No], default: 'No'}
+    rotation_1: {type: integer}
+    rotation_2: {type: integer}
+    supervisor: {type: integer}
+        # deprecated...
+    training_specialty: {type: enum, values: [General surgery, Select one, Head and Neck, Oncology, Paediatric, Plastics, Trauma, Transplant, Upper GI/HPB, Vascular, Colorectal, Breast/Endocrine]} 
+#    ....... #
+    mid_term_assessment: {type: enum, values: [Not assessed, Satisfactory, Unsatisfactory - Performance, Unsatisfactory - Form not Returned, Not Assessable], default: 'Not assessed'}
+    end_term_assessment:  {type: enum, values: [Not assessed, Satisfactory, Unsatisfactory - Performance, Unsatisfactory - Form not Returned, Not Assessable], default: 'Not assessed'}
+    trainee_id: {type: integer}
+  relations:
+    Rotation: {class: Rotations, local: rotation_id, foreign: id, type: one, foreignType: one, foreignAlias: Assessments, onDelete: CASCADE}
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: Trainee}
+    #Terms: {class: Terms, local: term, foreign: id, type: one, foreignType: many, foreignAlias: Terms}
+    #Hospital: {class: Hospital, local: hospital_name, foreign: id, type: one, foreignType: many, foreignAlias: Hostpitals}
+    FirstHostpital: {class: Hospital, local: rotation_1, foreign: id, type: one, foreignType: many, foreignAlias: FirstHostpital}
+    SecondHostpital: {class: Hospital, local: rotation_2, foreign: id, type: one, foreignType: many, foreignAlias: SecondHostpital}
+    #Supervisor: {class: Supervisor, local: supervisor, foreign: id, type: one, foreignType: many, foreignAlias: Supervisor}
+  indexes:
+    end_term_assessment:
+      fields:
+        end_term_assessment:
+          sorting: ASC
+    set_level:
+      fields:
+        set_level:
+          sorting: ASC
+Minicx:
+  actAs: [Timestampable, Commentable, Attachable,GSALoggable, GSAMessagable]
+  columns:
+    trainee_id: {type: integer}
+    date: {type: date}
+    assessor: {type: string(255)}
+    m_term_id:  {type: integer}
+    setting: {type: enum, values: ['Ward/ICU', ED, OPD, Other]}
+    settings_other: {type: string(255)}
+#    procedure_type: {type: enum, values: ['Minor - Intermediate', 'Major - Operative', 'Major - Non Operative']}
+#    procedure_name: {type: string(255)}
+#    number_performed: {type: integer}
+    case_type: {type: enum, values: [Select One, New Case, Follow-up]}
+#    focus: {type: enum, values: [Select One, History, Physcial examination, Diagnosis, Management, Explanation]}
+    history: { type: boolean, default: false }
+    physcial_examination: { type: boolean, default: false }
+    Diagnosis: { type: boolean, default: false }
+    Management: { type: boolean, default: false }
+    Explanation: { type: boolean, default: false }
+    difficulty: {type: enum, values: [Select One, Low, Average, High]}
+    history_taking: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    physical_examination: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    communicates_to_patient: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    adjusts_the_way_they_communicate: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    recognises_what_constitutes_bad_news: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    recognises_common_problems: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    professionalism: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    organisation_efficiency: {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    score: {type: enum, values: [Select One, Significant Improvement Required, Some Improvement Required, Competent], default: 'Select One'}
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: MiniCX}
+
+
+Dops:
+  actAs: [Timestampable, Commentable, Attachable, GSALoggable, GSAMessagable]
+  columns:
+#    assessment_id:
+    trainee_id: {type: integer}
+    
+    date: {type: date}
+    assessor: {type: string(255)}
+    d_term_id:  {type: integer}
+    setting: {type: enum, values: [Theatre, 'Ward/ICU', ED, Other]}
+    settings_other: {type: string(255)}
+#    procedure_type: {type: enum, values: ['Minor - Intermediate', 'Major - Operative', 'Major - Non Operative']}
+    procedure_name: {type: string(255)}
+    number_performed: {type: integer}
+#    case_type: {type: enum, values: [New Case, Follow-up]}
+#    focus: {type: enum, values: [History, Physcial examination, Diagnosis, Management, Explanation]}
+    difficulty: {type: enum, values: [Select One,Easier than usual, Average, More than usual]}
+    explains_the_procedures:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    prepares_for_procedure:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    demonstrates_aseptic:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    performs_technical_aspects:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    manual_dexterity:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    adapts_procedure:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    aware_of_own_limitations:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    completes_documentation:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    analyses_own_performance:  {type: enum, values: [Select One,Below Expectation, Borderline, Meets Expectations, Above Expectations, Not Observed/Not Applicable], default: 'Select One'}
+    score: {type: enum, values: [Select One,Significant Improvement Required, Some Improvement Required, Competent], default: 'Select One'}
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: dops, onDelete: CASCADE}
+
+Probations:
+  actAs:  [Timestampable, Commentable, Attachable,GSALoggable]
+  columns:
+    term_id: {type: integer, notblank: true}
+    status_month1:  {type: enum, values: [Not Received, Received], default: 'Not Received'}
+    status_month2:  {type: enum, values: [Not Received, Received], default: 'Not Received'}
+    status_month3:  {type: enum, values: [Not Received, Received], default: 'Not Received'}
+    status_month4:  {type: enum, values: [Not Received, Received], default: 'Not Received'}
+    status_month5:  {type: enum, values: [Not Received, Received], default: 'Not Received'}
+  relations:
+    Terms: {class: Terms, local: term_id, foreign: id, type: one, foreignType: one, foreignAlias: Term, onDelete: CASCADE}
+
+#Requirements Models
+RequirementsList:
+  actAs: [GSALoggable]
+  columns:
+    name:
+      type: string(255)
+      notblank: true
+      
+    total:
+      type: integer
+      notblank: true
+      
+
+TraineeRequirementsList:
+  actAs: [Timestampable, GSALoggable]
+  columns:
+    trainee_requirements_id: {type: integer}
+    amt: {type: string(255)}
+    completed: {type: string(255)}
+    exempt: {type: string(255)}
+    date_completed: {type: date, notblank: true}
+    requirements_list_id: {type: integer}
+  relations:
+    TraineeRequirements: {class: TraineeRequirements, local: trainee_requirements_id, foreign: id, type: one, foreignType: many, foreignAlias: TraineeRequirementsWrapper}
+
+TraineeRequirements:
+  actAs: [Timestampable, Commentable]
+  columns:
+    trainee_id: {type: integer}
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: one, foreignAlias: Trainees}
+
+EndoscopyRevised:
+  actAs: [Timestampable, Commentable]
+  columns:
+    logbook_id: {type: integer}
+    total_attempted_endo: {type: integer}
+    total_attempted_intact_colon_endo: {type: integer}
+    sucess_endo: {type: integer}
+    no_unassisted_therapeutic_procedures_endo: {type: integer}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: EndoscopyRevised, onDelete: CASCADE}
+  
+ColonoscopyRevised:
+  actAs: [Timestampable, Commentable]
+  columns:
+    logbook_id: {type: integer}
+    total_attempted_colono: {type: integer}
+    total_attempted_intact_colon_colono: {type: integer}
+    total_completed_unassisted_to_caecum_ileum_colono: {type: integer}
+    sucess_colono: {type: integer}
+    no_of_patients_undergoing_snare_polypectomies_colono: {type: integer}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: ColonoscopyRevised, onDelete: CASCADE}
+    
+Logbooks:
+  actAs: [Timestampable, Commentable, GSALoggable, GSAMessagable]
+  columns:
+    rotation_id: {type: integer}
+    consultant_name_1: {type: string(255)}
+    consultant_name_2: {type: string(255)}
+    consultant_name_3: {type: string(255)}
+    consultant_name_4: {type: string(255)}
+    consultant_name_5: {type: string(255)}
+    recreation: {type: integer}
+    sick: {type: integer}
+    study: {type: integer}
+    exam: {type: integer}
+    cpd: {type: integer}
+    parenting: {type: integer}
+    other: {type: integer}
+    other_specify: {type: string(255)}
+    number_completed: {type: integer}    
+#    days_absent:  {type: integer}
+#    absent_reason: {type: enum, values: [Recreation, Sick, Study, Exam, CPD, Parenting, Other]}
+    supervisor_approval: {type: enum, values: [Pending, Approved, Not Approved], default: 'Pending'}
+    supervisor_approval_date: {type: date}
+    supervisor_id:  {type: string(255)}
+    supervisor_app: {type: string(255)}
+    date_from: {type: date}
+    date_to:  {type: date}
+  relations:
+    Rotation: {class: Rotations, local: rotation_id, foreign: id, type: one, foreignType: many, foreignAlias: Logbooks, onDelete: cascade}
+  indexes:
+    supervisor_approval:
+      fields:
+        supervisor_approval:
+          sorting: ASC
+LogbooksMajorOperativeProceduresWrapper:
+  actAs: [Timestampable,GSALoggable]
+  columns:
+    logbook_id: {type: integer}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: LogbooksMajorOperativeProceduresWrapper, onDelete: CASCADE}
+
+LogbooksMajorOperativeProcedures:
+  actAs: [Timestampable]
+  columns:
+    logbooks_operative_procedures_id:  {type: integer} #Wrapper ID
+    operative_procedure_id: {type: integer} #Actual Procedure ID
+    surgeon_mentor_scrubbed: {type: string(255)}
+    surgeon_mentor_in_theatre: {type: string(255)}
+    surgeon_mentor_available: {type: string(255)}
+    assisting_surgeon_mentor: {type: string(255)}
+    assisting_senior_registrar: {type: string(255)}
+    total: {type: integer}
+  relations:
+    OperativeProceduresList: {class: OperativeProceduresList, local: operative_procedure_id, foreign: id, type: one, foreignType: many, foreignAlias: LogbookEntries}
+    LogbooksMajorOperativeProceduresWrapper: {class: LogbooksMajorOperativeProceduresWrapper, local: logbooks_operative_procedures_id, foreign: id, type: one, foreignType: many, onDelete: CASCADE}
+
+LogbooksNonOperativeProceduresWrapper:
+  actAs: [Timestampable,GSALoggable]
+  columns:
+    logbook_id: {type: integer}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: LogbooksNonOperativeProceduresWrapper, onDelete: CASCADE}
+
+LogbooksNonOperativeProcedures:
+  actAs: [Timestampable]
+  columns:
+    logbooks_non_operative_procedures_id:  {type: integer}
+    non_operative_procedure_id: {type: integer}
+    total: {type: integer}
+  relations:
+    NonOperativeProceduresList: {class: NonOperativeProceduresList, local: non_operative_procedure_id, foreign: id, type: one, foreignType: many, foreignAlias: LogbookEntries}
+    LogbooksNonOperativeProceduresWrapper: {class: LogbooksNonOperativeProceduresWrapper, local: logbooks_non_operative_procedures_id, foreign: id, type: one, foreignType: many, onDelete: CASCADE}
+
+LogbooksMinorIntermediateProceduresWrapper:
+  actAs: [Timestampable,GSALoggable]
+  columns:
+    logbook_id: {type: integer}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: LogbooksMinorIntermediateProceduresWrapper, onDelete: CASCADE}
+
+LogbooksMinorIntermediateProcedures:
+  actAs: [Timestampable]
+  columns:
+    logbooks_minor_intermediate_procedures_id:  {type: integer} #Wrapper ID
+    minor_intermediate_procedure_id: {type: integer} #Actual Procedure ID
+    surgeon_mentor_scrubbed: {type: string(255)}
+    surgeon_mentor_in_theatre: {type: string(255)}
+    surgeon_mentor_available: {type: string(255)}
+    assisting_surgeon_mentor: {type: string(255)}
+    assisting_senior_registrar: {type: string(255)}
+    total: {type: integer}
+  relations:
+    MinorIntermediateProceduresList: {class: MinorIntermediateProceduresList, local: minor_intermediate_procedure_id, foreign: id, type: one, foreignType: many, foreignAlias: LogbookEntries}
+    LogbooksMinorIntermediateProceduresWrapper: {class: LogbooksMinorIntermediateProceduresWrapper, local: logbooks_minor_intermediate_procedures_id, foreign: id, type: one, foreignType: many, onDelete: CASCADE}
+
+
+OperativeProceduresList:
+  actAs: [GSALoggable, SoftDelete,GSAProcedure]
+  columns:
+    category: {type: enum, values: [Surgical, Non-Surgical]}
+    type: {type: enum, values: [Abdominal, Breast, Colorectal, Endocrine, Head and Neck, Hepato-Pancreato-Bilary, Oesophango, Transplant, Trauma, Vascular, Cardiothoracic, Gynacological, Neurosurgical, Orthopaedic, Paediatric, Plastic, Urological]}
+    name: {type: string(255), notblank: true}
+
+NonOperativeProceduresList:
+  actAs: [GSALoggable, SoftDelete,GSAProcedure]
+  columns:
+    type: {type: enum, values: [Gastro-intestinal, Soft tissue, Trauma]}
+    name: {type: string(255), notblank: true}
+
+MinorIntermediateProceduresList:
+  actAs: [GSALoggable, SoftDelete,GSAProcedure]
+  columns:
+    type: {type: enum, values: [Breast, Gastrointestinal, Head and Neck, Hernia, Lymphatic, Skin & Appendage, Urology, Vascular, Thoracic]}
+    name: {type: string(255), notblank: true}
+
+
+#Hospital Models
+Hospital:
+  actAs: [Timestampable, GSARegionable, Commentable]
+  columns:
+    padded_id: {type: string(20), notnull: true, unique: true }
+    name: {type: string(255), notnull: true }
+
+HospitalDemographics:
+  actAs: [Timestampable]
+  columns:
+    address1: {type: string(255)}
+    address2: {type: string(255)}
+    suburb: {type: string(255)}
+    state:  {type: enum, values: [ACT,NSW,NT,QLD,SA,TAS,VIC,WA,OTHER], default: VIC}
+    country: {type: string(255), notnull: true}
+    postal_code: {type: string(100)}
+    website: {type: string(255)}
+    hospital_id: {type: integer, notblank: true }
+  relations:
+    Hospital: {class: Hospital, local: hospital_id, foreign: id, type: one, foreignType: one, foreignAlias: Demographics}
+
+HospitalContacts:
+  actAs: [Timestampable]
+  columns:
+    ceo_name: {type: string(255)}
+    ceo_email: {type: string(255)}
+    director_services_name: {type: string(255)}
+    director_services_email: {type: string(255)}
+    director_surgery_name: {type: string(255)}
+    director_surgery_email: {type: string(255)}
+    hospital_id: {type: integer, notblank: true}
+  relations:
+    Hospital: {class: Hospital, local: hospital_id, foreign: id, type: one, foreignType: one, foreignAlias: Contacts}
+
+Accreditations:
+  actAs: [Timestampable, GSAAccreditable, Commentable, Attachable, GSALoggable]
+  columns:
+    hospital_id: {type: integer}
+    hub_id : { type: integer }
+    accreditation_type: {type: enum, values: [Re-inspection, Initial, Quinquennial, Training Committee Review]}
+    start_date: {type: date}
+    set1_posts_inspection: {type: integer}
+    set2_plus_posts_inspection: {type: integer}
+    inspection_date: {type: date}
+    #physical_inspection: {type: enum, values: [YES, NO]}
+    #paper_inspection: {type: enum, values: [YES, NO]}
+    type_of_inspection: {type: enum, values: ['Physical Inspection', 'Paper Inspection']}
+    set1_posts_approved_general_surgery: {type: integer}
+    set1_posts_approved_urology: {type: integer}
+    set1_posts_approved_vascular: {type: integer}
+    set1_posts_approved_plastics: {type: integer}
+    set1_posts_approved_breast_and_endocrine: {type: integer}
+    set1_posts_approved_colorectal: {type: integer}
+    set1_posts_approved_trauma: {type: integer}
+    set1_posts_approved_transplant: {type: integer}
+    set1_posts_approved_upper_GI_HPB: {type: integer}
+    set1_posts_approved_cardiothoracic: {type: integer}
+    set1_posts_approved_head_and_neck: {type: integer}
+    set1_posts_approved_oncology: {type: integer}
+    set1_posts_approved_paediatric: {type: integer}
+    set1_posts_approved_asu: {type: integer}
+    set2_plus_posts_approved_general_surgery: {type: integer}
+    set2_plus_posts_approved_urology: {type: integer}
+    set2_plus_posts_approved_vascular: {type: integer}
+    set2_plus_posts_approved_plastics: {type: integer}
+    set2_plus_posts_approved_breast_and_endocrine: {type: integer}
+    set2_plus_posts_approved_colorectal: {type: integer}
+    set2_plus_posts_approved_trauma: {type: integer}
+    set2_plus_posts_approved_transplant: {type: integer}
+    set2_plus_posts_approved_upper_GI_HPB: {type: integer}
+    set2_plus_posts_approved_cardiothoracic: {type: integer}
+    set2_plus_posts_approved_head_and_neck: {type: integer}
+    set2_plus_posts_approved_oncology: {type: integer}
+    set2_plus_posts_approved_paediatric: {type: integer}
+    set2_plus_posts_approved_asu: {type: integer}
+    number_set1_stp: {type: integer}
+    number_set2_plus_stp: {type: integer}
+    accredited_from: {type: date, notnull: true}
+    accredited_to: {type: date, notnull: true}
+    general_comments: {type: string(1000)}
+#    follow_up_required: {type: string(255)}
+    three_month: {type: string(1000)}
+    three_month_reminder_date: {type: date}
+    six_month: {type: string(1000)}
+    six_month_reminder_date: {type: date}
+    twelve_month: {type: string(1000)}
+    twelve_month_reminder_date: {type: date}
+    draft_report_sent: {type: date}
+    draft_acknowledged: {type: date}
+    comments_acknowledged: {type: enum, values: [Yes, No]}
+    bigs_approval: {type: date}
+    best_approval: {type: date}
+    final_report_sent: {type: date}
+    final_acknowledged: {type: date}
+  relations:
+    Hospital: {class: Hospital, local: hospital_id, foreign: id, type: one, foreignType: many, foreignAlias: Accreditations}
+    Hub: {class: Hubs, local: hub_id, foreign: id, type: one, foreignType: many, foreignAlias: Accreditations }
+Hubs:
+  actAs: [Timestampable, GSALoggable]
+  columns:
+    name:
+      type: string(255)
+      notblank: true
+      
+
+Posts:
+  actAs: [Timestampable]
+  columns:
+    #post_name: {type: varchar(255)}
+    hub_id: {type: integer}
+    #hospital_id: {type: integer}
+    accreditation_id: { type: integer }
+    unit_name: {type: string(255)}
+    set_level: {type: enum, values:[1,2]}
+    term: {type: enum, values:[1,2]}
+  relations:
+    Hub: {class: Hubs, local: hub_id, foreign: id, type: one, foreignType: many, foreignAlias: Posts}
+    #Hospital: {class: Hospital, local: hospital_id, foreign: id, type: one, foreignType: many, foreignAlias: Posts}
+    Accreditations: {class: Accreditations, local: accreditation_id, foreign: id, type: one, foreignType: many, foreignAlias: Posts}
+  indexes:
+    posts_set_level:
+      fields:
+        set_level:
+          sorting: ASC
+    term:
+      fields:
+        term:
+          sorting: ASC
+Supervisor:
+  actAs: [Commentable, GSALoggable]
+  columns:
+    hospital_id: {type: integer, notnull: true}
+    general_surgeon_id: {type: integer, notnull: true }
+    start_date: { type: date, notnull: true }
+    end_date: { type: date, notnull: true }
+    is_active: { type: boolean, default: true }
+  relations:
+    Hospital: {class: Hospital, local: hospital_id, foreign: id, type: one, foreignType: many, foreignAlias: Supervisors}
+    GeneralSurgeon: {class: GeneralSurgeon, local: general_surgeon_id, foreign: id, type: one, foreignType: many, foreignAlias: Supervisorprofile}
+    
+
+
+####Committees Models####
+Committee:
+  actAs: [Timestampable, Commentable, GSALoggable]
+  columns:
+    name: {type: string(255), notblank: true}
+    state:  {type: enum, values: [ACT,NSW,NT,QLD,SA,TAS,VIC,WA,OTHER], default: VIC}
+    status: {type: enum, values:[Active, Inactive]}
+    committee_acronym: {type: string(255)}
+
+CommitteeMembers:
+  actAs: [Timestampable, Commentable, GSALoggable]
+  columns:
+    position: {type: enum, values: [Chair, Deputy Chair, President, Vice President, Treasurer, Member, Co-opted, Ex-officio, Trainee Representative, By invitation, Observer, Secretariat], default: Chair }
+    surname: {type: string(255)}
+    description: {type: string(255)}
+    start_date: {type: date}
+    to_date: {type: date}
+    committee_id: {type: integer}
+    member_type: {type: enum, values:[Trainee, GeneralSurgeon, sfGuardUser]}
+    member_key: {type: integer}
+
+  relations:
+    Committee: {class: Committee, local: committee_id, foreign: id, type: one, foreignType: many, foreignAlias: Members}
+
+#Agendas, Minutes & Docs models to come after asset-manager completion
+
+######General Surgeons Models######
+GeneralSurgeon:
+  inheritance: {type: concrete, extends: sfGuardUser}
+  actAs: [Commentable, GSALoggable]
+  columns:
+
+    prefix: {type: enum, values:[Ms, Mr, Mrs, Miss, Dr, Prof, Assoc Prof]}
+    preferred_name: {type: string(255)}
+    salutation: {type: string(255)}
+    start_date: {type: date}
+    finish_date: {type: date}
+    fee: {type: float}
+    paid: { type: boolean, default: false }
+    date_of_birth: {type: date}
+    gender: {type: enum, values: [Female , Male], default: Male}
+    fellowship_admission_date: {type: date}
+    retired: {type: enum, values: [Yes , No], default: No}
+    do_not_email: { type: boolean, default: false }
+    do_not_survey: { type: boolean, default: false }
+#    member_type: {type: enum, values:[M, NM, O, T]}
+    #member_type: {type: enum, values:[Member, Non-member]}
+    #gsa_member: {type: enum, values:[Yes, No]}
+    #supervisor: {type: boolean, default: false }
+    #chair: {type: boolean, default: false }
+    #status: { type: enum, values:[Active, Life Member, Missionary Member, Honorary Member, Cancelled] }
+    member_type: { type: enum, values:[Active, Life Member, Missionary Member, Honorary Member, Cancelled, Non-member, Non-GS] }
+    mobile_number:  {type: string(24)}
+    description: { type: string(500) }
+    web_address: { type: string(255) }
+    breast: { type: boolean, default: false }
+    colonoscopy: { type: boolean, default: false }
+    colorectal: { type: boolean, default: false }
+    endocrine: { type: boolean, default: false }
+    endoscopy: { type: boolean, default: false }
+    general_surgery: { type: boolean, default: false }
+    head_and_neck: { type: boolean, default: false }
+    hepato_biliary: { type: boolean, default: false }
+    hernia: { type: boolean, default: false }
+    laparoscopic_surgery: { type: boolean, default: false }
+    melanoma: { type: boolean, default: false }
+    obesity_bariatric: { type: boolean, default: false }
+    surgical_oncology: { type: boolean, default: false }
+    transplant: { type: boolean, default: false }
+    trauma_acute_care: { type: boolean, default: false }
+    upper_GI: { type: boolean, default: false }
+    vascular: { type: boolean, default: false }
+    practice_overview:  { type: string(1000) }
+    agree_to_be_on_find_a_surgeon: { type: boolean, default: false }
+    deleted: { type: boolean, default: false }
+  indexes:
+    member_type:
+      fields:
+        member_type:
+          sorting: ASC
+    fee: 
+      fields:
+        fee:
+          sorting: ASC
+
+SurgeonPractice:
+  actAs: 
+    Timestampable: ~
+    Geolocatable:
+      fields: [postcode, country]
+  columns:
+    phone:  {type: string(24)}
+    mobile:  {type: string(24)}
+    fax:  {type: string(24)}
+    website:  {type: string(255)}
+    address1:  {type: string(255)}
+    address2:  {type: string(255)}
+    suburb:  {type: string(48)}
+    postcode:  {type: string(24)}
+    state:  {type: enum, values: [ACT,NSW,NT,QLD,SA,TAS,VIC,WA,OTHER], default: OTHER}
+    country: {type: string(255), notnull: true}
+    general_surgeon_id: {type: integer}
+  relations:
+    GeneralSurgeon: {class: GeneralSurgeon, local: general_surgeon_id, foreign: id, type: one, foreignType: one, foreignAlias: Practice}
+
+SurgeonMailing:
+  actAs: [Timestampable]
+  columns:
+    phone:  {type: string(24)}
+    mobile:  {type: string(24)}
+    fax:  {type: string(24)}
+    website:  {type: string(255)}
+    address1:  {type: string(255)}
+    address2:  {type: string(255)}
+    suburb:  {type: string(48)}
+    postcode:  {type: string(24)}
+    state:  {type: enum, values: [ACT,NSW,NT,QLD,SA,TAS,VIC,WA,OTHER], default: OTHER}
+    country: {type: string(255), notnull: true}
+    general_surgeon_id: {type: integer}
+  relations:
+    GeneralSurgeon: {class: GeneralSurgeon, local: general_surgeon_id, foreign: id, type: one, foreignType: one, foreignAlias: Mailing}
+
+SurgeonSpecialties:
+  actAs: [Timestampable]
+  columns:
+    specialty_id: {type: integer}
+    general_surgeon_id: {type: integer, notblank: true}
+  relations:
+    GeneralSurgeon: {class: GeneralSurgeon, local: general_surgeon_id, foreign: id, type: one, foreignType: many, foreignAlias: Specialties}
+    Specialties: {class: Specialties, local: specialty_id, foreign: id, type: one, foreignType: many, foreignAlias: SpecialtiesItem}
+
+Specialties:
+  columns:
+    name: {type: string(255), notblank: true }
+
+RegionalChair:
+  actAs: [Commentable, GSALoggable, GSARegionable ]
+  columns:
+    #hospital_id: {type: integer, notblank: true}
+    general_surgeon_id: {type: integer, notblank: true }
+    is_active: { type: boolean, default: false }
+  relations:
+    #Hospital: {class: Hospital, local: hospital_id, foreign: id, type: one, foreignType: many, foreignAlias: RegionalChairs}
+    GeneralSurgeon: {class: GeneralSurgeon, local: general_surgeon_id, foreign: id, type: one, foreignType: many, foreignAlias: RegionalChairs}
+    
+HubSupervisor:
+  actAs: [Commentable, GSALoggable ]
+  columns:
+    general_surgeon_id: {type: integer, notblank: true, unique: true }
+    is_active: { type: boolean, default: false }
+    hub_id: {type: integer, notblank: true}     
+  relations:
+    Hub: {class: Hubs, local: hub_id, foreign: id, type: one, foreignType: many, foreignAlias: HubSupervisor}
+    GeneralSurgeon: {class: GeneralSurgeon, local: general_surgeon_id, foreign: id, type: one, foreignType: many, foreignAlias: HubSupervisor}    
+
+#######Messaging models######
+Messages:
+  actAs: [Timestampable, GSALoggable]
+  columns:
+    subject: {type: string(255), notblank: true}
+    message_content: {type: string(5000), notblank: true}
+    from_section: {type: string(255), notblank: true }
+    from_id: {type: integer(20), notblank: true }
+    sent_delete: {type: enum, values: [yes, no], default: no}
+    region: {type: string(255) }
+MessageDetails:
+  actAs: [Timestampable]
+  columns:
+    message_id: {type: integer(20), notblank: true}
+    to_id: {type: string(30), notblank: true}
+    to_section: {type: string(255), notblank: true}
+    status: {type: enum, values: [read, unread], default: unread}
+    delete_status: {type: enum, values: [yes, no], default: no}
+  relations:
+    Messages: {class: Messages, local: message_id, foreign: id, type: one, foreignType: many, foreignAlias: Messages}
+
+
+#####Requests#####
+Requests:
+  actAs: [Timestampable, Commentable, Attachable, GSALoggable, GSAMessagable]
+  columns:
+    trainee_id: {type: integer(20)}
+    leave_term: {type: integer(20)}    
+    requests: {type: enum, values: [Select One, Interruption,Other,Overseas Training,Part-time Training,RPL,Extension to Training,Research Requirement,Transfer Regions,Transfer Networks/Hub,Exemption to Colonoscopy and Endoscopy Numbers for Fellowship Exam,Research Project Pre-Approval,Withdrawal,Extension to Six Weeks Leave], default: 'Select One' }
+    request_type: {type: enum, values: [Select One, Parental Leave, Medical Condition, Personal Circumstances, Research, ASSET, CCrISP, CLEAR, EMST, Clinical Exam, Clinical Rotation, SSE - Generic, SSE - Specific, Transfer, Duration, Explanation, Research Requirement], default: 'Select One' }
+    number_of_additional_weeks_leave: {type: integer(20)}
+    reason_for_leave: {type: string(5000)}
+    interruption_sub_type: {type: enum, values: [Carer, Other] }
+    from_term: {type: integer(20)}
+    to_term: {type: integer(20)}
+    return_term: {type: integer(20)}
+    no_of_terms: {type: integer(20)}
+    requires_further_training: {type: string(5000)}
+    transfer_region: {type: enum, values: [ACT-NSW, QLD, SA, VIC, WA]}
+    transfer_region_reason: {type: string(5000)}
+    colonoscopy_exemption: { type: enum, values: [Colonoscopy, Endoscopy, Both] }
+    exemption_reason: {type: string(5000)}
+    transfer_network: { type: enum, values: [Eastern, Western, Southern,St Vincent’s,Royal Melbourne,Austin,Central,North Eastern,POWH / Bankstown,Newcastle / Gosford,Western (NSW),Southern (NSW),Northside,Southside,Gold Coast,Northern Queensland,The Alfred,South West Regional, Canberra] }
+    transfer_network_reason: {type: string(5000)}
+    overseas_hospital_name: {type: string(255)}
+    training_extension_duration: { type: enum, values: [6 Months, 12 Months] }
+    training_extension_explanation: { type: string(750) }
+    project_title: { type: string(255) }
+    supervisor:  { type: string(500) }
+    researchers_involved: { type: string(500) }
+    project_background: { type: string(500) }
+    relevance_to_general_surgery: { type: string(1500) }
+    aims: { type: string(500) }
+    design: { type: string(500) }
+    methodology: { type: string(500) }
+    expected_duration: { type: string(500) }
+    dissemination_of_results: { type: enum, values: [Publication, Presentation,Both] }
+    research_design: { type: string(750) }
+    brief_description_of_research: { type: string(750) }
+    relevance_of_research_project_to_surgery: { type: string(1500) }
+    details_of_any_related_publications: { type: string(750) }
+    details_of_any_related_presentations: { type: string(750) }
+#    statement_of_verification_by_supervisor: { type: string(500) }
+    accredited_research: { type: enum, values: [Yes, No], default: No }
+    organisation: { type: string(255) }
+#    trainee_involvement: {type: enum, values: [Project Concept, Project Design, Writing Project Proposal, Data Collection, Data Analyses, Writing Ehtics Proposal and Submission, Data Interpretation, Project Implementation], default: Project Concept }
+    project_concept: { type: boolean }
+    project_design: { type: boolean }
+    writing_project_proposal: { type: boolean }
+    data_collection: { type: boolean }
+    data_analysis: { type: boolean }
+    writing_ethics_proposal_and_submission: { type: boolean }
+    data_interpretation: { type: boolean }
+    project_implementation: { type: boolean }
+    other: { type: string(255) }
+#    ....
+    sign_off_from_supervisor: { type: string(255) }
+    proof_of_publication: { type: string(255) }
+    admin_granted_status: {type: enum, values: [Approved, Declined, Pending], default: 'Pending'}
+    admin_approval_date: {type: date}
+    regional_board_status: {type: enum, values: [Approved, Declined, Pending], default: 'Pending'}
+    regional_board_approval_date: {type: date}
+    comments: {type: string(5000)}
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: TraineeRequests}
+    #FromTerm: {class: Terms, local: from_term, foreign: id, type: one, foreignType: many, foreignAlias: FromTerm}
+    #ToTerm: {class: Terms, local: to_term, foreign: id, type: one, foreignType: many, foreignAlias: ToTerm}
+  indexes:
+    requests:
+      fields:
+        requests:
+          sorting: ASC
+    request_type:
+      fields:
+        request_type:
+          sorting: ASC
+
+####Help#####
+Help:
+  actAs: [Timestampable]
+  columns:
+    title: { type: string(100), notblank: true}
+    general: { type: boolean, default: false }
+    staff: { type: boolean, default: false }
+    trainee: { type: boolean, default: false }
+    committee: { type: boolean, default: false }
+    supervisor: { type: boolean, default: false }
+    hubsupervisor: { type: boolean, default: false }
+    regionalChair: { type: boolean, default: false }
+    generalSurgeon: { type: boolean, default: false }
+    content: { type: string(5000) }
+
+
+
+#####Committee FileTables  agenda,  minutes, Misc.#####
+CommitteeFiles:
+  actAs: [Timestampable, GSALoggable]
+  columns:
+    title:
+      type:       string(255)
+    description:
+      type:       string(255)
+    url:
+      type:       string(255)
+      default:   "default.png"
+    type:
+      type:       enum
+      values:     [image, video, audio, document, application, link, model, custom, other]
+      default:    other
+    object_id:
+      type:         integer
+    object_class:
+      type:         string(255)
+    uploaded_by:
+      type:         integer
+    uploader_section:
+      type:         string(255)
+    committee_id: { type: integer, notblank: true }
+  relations:
+    Committee: { class: Committee, local: committee_id, foreign: id, type: one, foreignType: many, foreignAlias: Files }
+
+# AgendaFiles Upload
+AgendaFiles:
+  inheritance:
+    extends: CommitteeFiles
+    type: column_aggregation
+    keyField: section_model
+    keyValue: 1
+
+# MinuteFiles Upload
+MinuteFiles:
+  inheritance:
+    extends: CommitteeFiles
+    type: column_aggregation
+    keyField: section_model
+    keyValue: 2
+  columns:
+    meeting_date: { type: date}
+
+MiscFiles:
+  inheritance:
+    extends: CommitteeFiles
+    type: column_aggregation
+    keyField: section_model
+    keyValue: 3
+
+####Files Section#####
+Files:
+  inheritance: {type: concrete, extends: Attachment}
+
+FileDetails:
+  actAs: [Timestampable]
+  columns:
+    file_id: {type: integer(20)}
+    to_id: {type: integer(20)}
+    to_section: {type: string(255)}
+  relations:
+    Attachment: {class: Files, local: file_id, foreign: id, type: one, foreignType: many, foreignAlias: Files}
+
+#Activities
+Activity:
+  actAs: [Timestampable]
+  columns:
+    user_class: {type: string(255)}
+    user_id: {type: integer}
+    section_name: {type: string(255)}
+    section_id: {type: integer}
+    message: {type: string(255)}
+    
+#...................  change req. 30-03-11  #939
+
+LogbooksEndoscopyProceduresWrapper:
+  actAs: [Timestampable,GSALoggable]
+  columns:
+    logbook_id: {type: integer}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: LogbooksEndoscopyProceduresWrapper, onDelete: CASCADE}
+
+LogbooksEndoscopyProcedures:
+  actAs: [Timestampable]
+  columns:
+    logbooks_endoscopy_procedures_id:  {type: integer} #Wrapper ID
+    endoscopy_procedure_id: {type: integer} #Actual Procedure ID
+    surgeon_mentor_scrubbed: {type: string(255)}
+    surgeon_mentor_in_theatre: {type: string(255)}
+    surgeon_mentor_available: {type: string(255)}
+    assisting_surgeon_mentor: {type: string(255)}
+    assisting_senior_registrar: {type: string(255)}
+    total: {type: integer}
+  relations:
+    EndoscopyProceduresList: {class: EndoscopyProceduresList, local: endoscopy_procedure_id, foreign: id, type: one, foreignType: many, foreignAlias: LogbookEntries}
+    LogbooksEndoscopyProceduresWrapper: {class: LogbooksEndoscopyProceduresWrapper, local: logbooks_endoscopy_procedures_id, foreign: id, type: one, foreignType: many, onDelete: CASCADE}
+
+EndoscopyProceduresList:
+  actAs: [GSALoggable, SoftDelete,GSAProcedure]
+  columns:
+    type: {type: enum, values: [ Endoscopy - Diagnostic, Endoscopy - Therapeutic, Endoscopy - Other]}
+    name: {type: string(255)}
+
+LogbooksColonoscopyProceduresWrapper:
+  actAs: [Timestampable,GSALoggable]
+  columns:
+    logbook_id: {type: integer}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: LogbooksColonoscopyProceduresWrapper, onDelete: CASCADE}
+
+LogbooksColonoscopyProcedures:
+  actAs: [Timestampable]
+  columns:
+    logbooks_colonoscopy_procedures_id:  {type: integer} #Wrapper ID
+    colonoscopy_procedure_id: {type: integer} #Actual Procedure ID
+    surgeon_mentor_scrubbed: {type: string(255)}
+    surgeon_mentor_in_theatre: {type: string(255)}
+    surgeon_mentor_available: {type: string(255)}
+    assisting_surgeon_mentor: {type: string(255)}
+    assisting_senior_registrar: {type: string(255)}
+    total: {type: integer}
+  relations:
+    ColonoscopyProceduresList: {class: ColonoscopyProceduresList, local: colonoscopy_procedure_id, foreign: id, type: one, foreignType: many, foreignAlias: LogbookEntries}
+    LogbooksColonoscopyProceduresWrapper: {class: LogbooksColonoscopyProceduresWrapper, local: logbooks_colonoscopy_procedures_id, foreign: id, type: one, foreignType: many, onDelete: CASCADE}
+
+ColonoscopyProceduresList:
+  actAs: [GSALoggable, SoftDelete,GSAProcedure]
+  columns:
+    type: {type: enum, values: [ Colonoscopy - Diagnostic, Colonoscopy - Therapeutic]}
+    name: {type: string(255)}
+
+
+Comment:
+  columns:
+    added_from: {type: string(50)}
+
+Reports:
+  actAs: [Timestampable]
+  columns:
+    report_type: {type: enum, values: [Trainee, General Surgeon, Hospital, Committee], default: 'Trainee'}
+    title: {type: string(255)}
+    filter_field: {type: string(500)}
+    query: {type: string(5000)}
+    columns: {type: string(5000)}
+    group_by: {type: string(5000)}
+
+TraineeSetLevel:
+  actAs: [Timestampable]
+  columns:
+    trainee_id: {type: integer}
+    set_level: {type: integer}
+    completed_rotations: {type: integer}
+    set1_terms: {type: string(1000)}
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: one, foreignAlias: CurrentSet, onDelete: CASCADE}
+
+CompletedRequirements:
+  actAs: [Timestampable]
+  columns:
+    trainee_id: {type: integer }
+    rotations: {type: integer }
+    logbookmajorcases: {type: integer }
+    logbookminorcases: {type: integer }
+    logbookprimaryoperator: {type: integer }
+    logbookendoscopy: {type: integer }
+    logbookcolonscopy: {type: integer }
+    research: {type: integer }
+    asset: {type: integer }
+    ccrisp: {type: integer }
+    clear: {type: integer }
+    emst: {type: integer }
+    clinicalexamination: {type: integer }
+    ssegeneric: {type: integer }
+    ssespecific: {type: integer }
+    fellowshipexam: {type: integer }
+    approvalforfellowshipexamination: {type: integer }
+    approvalforgeneralsurgeryfellowship: {type: integer }
+    minicex: {type: integer }
+    dops: {type: integer }
+    gsatraineesday: { type: integer }
+    researchprojectapproved: { type: integer }
+  relations:
+    Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: one, foreignAlias: CompletedRequirement, onDelete: CASCADE}
+    
+LogbooksSurgeonsWrapper:
+  actAs: [Timestampable,GSALoggable]
+  columns:
+    logbook_id: {type: integer}
+    surgeon_name_1: {type: string(255)}
+    surgeon_name_2: {type: string(255)}
+    surgeon_name_3: {type: string(255)}
+    surgeon_name_4: {type: string(255)}
+    surgeon_name_5: {type: string(255)}
+    surgeon_name_6: {type: string(255)}
+    surgeon_name_7: {type: string(255)}
+    surgeon_name_8: {type: string(255)}
+  relations:
+    Logbooks: {class: Logbooks, local: logbook_id, foreign: id, type: one, foreignType: one, foreignAlias: LogbooksSurgeonsWrapper, onDelete: CASCADE}
+
+LogbooksSurgeonsData:
+  actAs: [Timestampable]
+  columns:
+    logbook_id: {type: integer}
+    logbooks_surgeons_wrapper_id:  {type: integer} #Wrapper ID
+    surgeons_data_id: {type: integer} #Actual Procedure ID
+    surgeon_mentor_scrubbed: {type: string(255)}
+    surgeon_mentor_in_theatre: {type: string(255)}
+    surgeon_mentor_available: {type: string(255)}
+    assisting_surgeon_mentor: {type: string(255)}
+    assisting_senior_registrar: {type: string(255)}
+    total: {type: integer}
+  relations:
+    SurgeonsDataList: {class: SurgeonsDataList, local: surgeons_data_id, foreign: id, type: one, foreignType: many, foreignAlias: LogbookSurgeonsData}
+    LogbooksSurgeonsWrapper: {class: LogbooksSurgeonsWrapper, local: logbooks_surgeons_wrapper_id, foreign: id, type: one, foreignType: many, onDelete: CASCADE}
+    
+SurgeonsDataList:
+   actAs: [GSALoggable, SoftDelete]
+   columns:
+#    type: {type: enum, values: [ Colonoscopy - Diagnostic, Colonoscopy - Therapeutic]}
+    name: {type: string(255)}
+    type: {type: enum, values: [Surgeon 1, Surgeon 2, Surgeon 3, Surgeon 4,Surgeon 5,Surgeon 6,Surgeon 7,Surgeon 8]}
+    display_order: {type: integer}
+
+Events:
+  actAs: [Timestampable]
+  columns:
+    name: {type: string(255)} 
+    start_date: {type: date}
+    end_date: {type: date}
+    description: {type: string(500)}
+    venue: {type: string(255)}
+    tag: {type: string(255), unique: true}
+    link_to_trainees_day: { type: boolean, default: false }
+TraineeEvents:
+  actAs: [Timestampable]
+  columns:
+    event_id:   {type: integer}
+    trainee_id: {type: integer}
+    is_attended: {type: enum, values: [Attended, Not Attended], default: Attended}
+  relations:
+    Events: {class: Events, local: event_id, foreign: id, type: one, foreignType: many, foreignAlias: TraineeEvents, onDelete: CASCADE}
+    Trainee: {class: Trainee, local: trainee_id, foreign: username, type: one, foreignType: many, foreignAlias: TraineeEvents, onDelete: CASCADE}
+    
+ImgTraineeEvents:
+  actAs: [Timestampable]
+  columns:
+    imgevent_id:   {type: integer}
+    imgtrainee_id: {type: integer}
+    is_attended: {type: enum, values: [Attended, Not Attended], default: Attended}
+  relations:
+    ImgEvents: {class: ImgEvents, local: imgevent_id, foreign: id, type: one, foreignType: many, foreignAlias: ImgTraineeEvents, onDelete: CASCADE}
+    ImgTrainee: {class: ImgTrainee, local: imgtrainee_id, foreign: username, type: one, foreignType: many, foreignAlias: ImgTraineeEvents, onDelete: CASCADE}    
+    
+ImgEvents:
+  actAs: [Timestampable]
+  columns:
+    name: {type: string(255)} 
+    start_date: {type: date}
+    end_date: {type: date}
+    description: {type: string(500)}
+    venue: {type: string(255)}
+    tag: {type: string(255), unique: true}
+    
+sfGuardUserPermission:
+  actAs: [GSAPermissionCheck]
+  
+sfGuardUserGroup:  
+  actAs: [GSAPermissionCheck]
+
+Seam:
+  actAs: [Timestampable, Commentable, Attachable]    
+  columns:
+     trainee_id: {type: integer}
+     acute_abdomen: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+     operating_theatre: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+     haematology: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+     anatomy: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+     critical_care_and_trauma: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+     nutrition: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+     peri_operative_care: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+     rehabilitation_and_palliative_care: {type: enum, values: [Satisfactory, Unsatisfactory, Not Assessed], default: 'Not Assessed'}
+  relations:
+     Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: Seams}
+     
+SeamRequirements:
+  actAs: [Timestampable]
+  columns:
+    trainee_id: {type: integer}
+    seam_completed: {type: integer}
+    date_completed: {type: date, notblank: true}
+  relations:
+     Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: SeamRequirements}
+     
+Course:
+  actAs: [Timestampable]
+  columns:
+    trainee_id: {type: integer}
+    completed: {type: integer}
+    exempt: {type: integer}
+    date_completed: {type: date, notblank: true}
+  relations:
+     Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: Course}
+     
+Exams:
+  actAs: [Timestampable]
+  columns:
+    trainee_id: {type: integer}
+    completed: {type: integer}
+    exempt: {type: integer}
+    date_completed: {type: date, notblank: true}
+  relations:
+     Trainee: {class: Trainee, local: trainee_id, foreign: id, type: one, foreignType: many, foreignAlias: Exams}      
+
+sfGuardUserPermission:
+  actAs: [GSAPermissionCheck]
+  
+sfGuardUserGroup:  
+  actAs: [GSAPermissionCheck]
+
