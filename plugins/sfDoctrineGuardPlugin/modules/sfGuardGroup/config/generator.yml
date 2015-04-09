@@ -1,8 +1,8 @@
 generator:
-  class: gsaDoctrineGenerator
+  class: sfDoctrineGenerator
   param:
     model_class:           sfGuardGroup
-    theme:                 jroller
+    theme:                 admin
     non_verbose_templates: true
     with_show:             false
     singular:              ~

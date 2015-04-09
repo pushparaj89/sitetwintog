@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -64,7 +64,7 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
   public function render($name, $value = null, $attributes = array(), $errors = array())
   {
     $visibleValue = $this->getOption('value_callback') ? call_user_func($this->getOption('value_callback'), $value) : $value;
-   
+
     return $this->renderTag('input', array('type' => 'hidden', 'name' => $name, 'value' => $value)).
            parent::render('autocomplete_'.$name, $visibleValue, $attributes, $errors).
            sprintf(<<<EOF
@@ -73,17 +73,15 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
     jQuery("#%s")
     .autocomplete('%s', jQuery.extend({}, {
       dataType: 'json',
-      cacheLength: 0,
       parse:    function(data) {
         var parsed = [];
         for (key in data) {
-          parsed[parsed.length] = { data: [ data[key], key ], value: data[key], result: data[key]};
+          parsed[parsed.length] = { data: [ data[key], key ], value: data[key], result: data[key] };
         }
         return parsed;
       }
     }, %s))
-    .result(function(event, data) {
-    jQuery("#%s").val(data[1]); });
+    .result(function(event, data) { jQuery("#%s").val(data[1]); });
   });
 </script>
 EOF

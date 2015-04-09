@@ -6,7 +6,7 @@ html { overflow: -moz-scrollbars-vertical !important; }
 .fg-menu .fg-button { text-align: left; }
 .fg-menu .fg-button-icon-left { text-indent: 1.8em; }
 
-.sf_admin_actions { margin: 0; padding: 0; list-style-type: none; }
+.sf_admin_actions { margin: 0; padding: 0; list-style-type: none; text-align: left}
   .sf_admin_actions li { display: inline; }
 
 /* flash messages */
@@ -114,11 +114,11 @@ html { overflow: -moz-scrollbars-vertical !important; }
     .sf_admin_actions_form .sf_admin_action_list { position: absolute; left: .4em; }
 
   /* fieldsets tab menu */
-  #sf_admin_form_tab_menu { margin: 10px 0; border: 0; }
+  #sf_admin_form_tab_menu { margin: 10px 0; border: 0; text-align: left}
     #sf_admin_form_tab_menu .ui-tabs-panel { border-width: 1px; }
 
   /* default inputs styles */
-  .sf_admin_text input, textarea, select { margin: 0.5em 0; border: 2px solid #bbb; }
+  .sf_admin_text input, textarea, select { margin: 0.5em 0; border: 1px solid #bbb; }
   .sf_admin_text input[type=text]:focus, .sf_admin_text input[type=password]:focus, textarea:focus, select:focus {
     border-color: #333;
   }
@@ -159,9 +159,9 @@ html { overflow: -moz-scrollbars-vertical !important; }
 
 /* Vertical Tabs
 ----------------------------------*/
-.ui-tabs-vertical .ui-tabs-nav { position: relative; padding: .2em .1em .2em .2em; float: left; width: 25%; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 99%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-    .ui-tabs-vertical .ui-tabs-nav li a { display: block; float: none; }
+.ui-tabs-horizontal .ui-tabs-nav { position: relative; padding: .2em .1em .2em .2em; float: left; width: 25%; }
+  .ui-tabs-horizontal .ui-tabs-nav li { clear: left; width: 99%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+    .ui-tabs-horizontal .ui-tabs-nav li a { display: block; float: none; }
 
-.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
-.ui-tabs-vertical .ui-tabs-panel { float: left; width: 70%; padding: 1em 1%; margin: 0 0 0 2%; }
+.ui-tabs-horizontal .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+.ui-tabs-horizontal .ui-tabs-panel { float: left; width: 70%; padding: 1em 1%; margin: 0 0 0 2%; }

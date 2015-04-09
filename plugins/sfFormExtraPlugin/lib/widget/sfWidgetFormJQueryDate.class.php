@@ -37,11 +37,11 @@ class sfWidgetFormJQueryDate extends sfWidgetForm
    */
   protected function configure($options = array(), $attributes = array())
   {
-    $this->addOption('image', '/images/calendar.jpg');
+    $this->addOption('image', false);
     $this->addOption('config', '{}');
     $this->addOption('culture', '');
     $this->addOption('date_widget', new sfWidgetFormDate());
-    //setOption('format', '%day%/%month%/%year%');
+
     parent::configure($options, $attributes);
 
     if ('en' == $this->getOption('culture'))
@@ -73,13 +73,12 @@ class sfWidgetFormJQueryDate extends sfWidgetForm
     if ($this->getOption('date_widget') instanceof sfWidgetFormDateTime)
     {
       $years = $this->getOption('date_widget')->getDateWidget()->getOption('years');
-      $this->getOption('date_widget')->getDateWidget()->setOption('format', '%day%/%month%/%year%');
     }
     else
     {
       $years = $this->getOption('date_widget')->getOption('years');
-      $this->getOption('date_widget')->setOption('format', '%day%/%month%/%year%');
     }
+
     return $this->getOption('date_widget')->render($name, $value, $attributes, $errors).
            $this->renderTag('input', array('type' => 'hidden', 'size' => 10, 'id' => $id = $this->generateId($name).'_jquery_control', 'disabled' => 'disabled')).
            sprintf(<<<EOF
@@ -87,6 +86,7 @@ class sfWidgetFormJQueryDate extends sfWidgetForm
   function wfd_%s_read_linked()
   {
     jQuery("#%s").val(jQuery("#%s").val() + "-" + jQuery("#%s").val() + "-" + jQuery("#%s").val());
+
     return {};
   }
 
@@ -116,8 +116,6 @@ class sfWidgetFormJQueryDate extends sfWidgetForm
     jQuery("#%s").datepicker(jQuery.extend({}, {
       minDate:    new Date(%s, 1 - 1, 1),
       maxDate:    new Date(%s, 12 - 1, 31),
-      changeMonth: true,
-      changeYear: true,
       beforeShow: wfd_%s_read_linked,
       onSelect:   wfd_%s_update_linked,
       showOn:     "button"

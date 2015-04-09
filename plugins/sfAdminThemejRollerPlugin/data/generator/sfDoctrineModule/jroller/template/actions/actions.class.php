@@ -28,8 +28,7 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
   }
 
 <?php include dirname(__FILE__).'/../../parts/indexAction.php' ?>
-<?php include dirname(__FILE__).'/../../parts/printAction.php' ?>
-<?php //include dirname(__FILE__).'/../../parts/csvAction.php' ?>
+
 <?php if ($this->configuration->hasFilterForm()): ?>
 <?php include dirname(__FILE__).'/../../parts/filterAction.php' ?>
 <?php endif; ?>

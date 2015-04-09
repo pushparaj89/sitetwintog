@@ -18,8 +18,8 @@ $.fn.extend({
 		options = $.extend({}, $.Autocompleter.defaults, {
 			url: isUrl ? urlOrData : null,
 			data: isUrl ? null : urlOrData,
-			delay: isUrl ? $.Autocompleter.defaults.delay : 150,
-			max: options && !options.scroll ? 150 : 150
+			delay: isUrl ? $.Autocompleter.defaults.delay : 10,
+			max: options && !options.scroll ? 10 : 150
 		}, options);
 		
 		// if highlight is set to false, replace it with a do-nothing function
@@ -414,8 +414,8 @@ $.Autocompleter.defaults = {
 	matchCase: false,
 	matchSubset: true,
 	matchContains: false,
-	cacheLength: 150,
-	max: 500,
+	cacheLength: 10,
+	max: 100,
 	mustMatch: false,
 	extraParams: {},
 	selectFirst: true,
@@ -429,7 +429,7 @@ $.Autocompleter.defaults = {
 		return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1") + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
 	},
     scroll: true,
-    scrollHeight: 360
+    scrollHeight: 180
 };
 
 $.Autocompleter.Cache = function(options) {

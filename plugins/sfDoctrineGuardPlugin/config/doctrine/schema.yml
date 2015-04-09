@@ -53,32 +53,22 @@ sfGuardGroupPermission:
 sfGuardUser:
   actAs: [Timestampable]
   columns:
-    first_name:
-      type: string(255)
-      notblank: true
-      minlength: 3
-      
-    last_name:
-      type: string(255)
-      notnull: true
-      minlength: 3
-      
+    first_name: string(255)
+    last_name: string(255)
     email_address:
       type: string(255)
       notnull: true
       unique: true
-      email: true
     username:
       type: string(128)
       notnull: true
       unique: true
-      minlength: 3
     algorithm:
       type: string(128)
       default: sha1
       notnull: true
     salt: string(128)
-    password: {type: string(128), minlength: 3}
+    password: string(128)
     is_active:
       type: boolean
       default: 1
@@ -182,11 +172,11 @@ sfGuardForgotPassword:
     expires_at:
       type: timestamp
       notnull: true
-#  relations:
-#    User:
-#      class: sfGuardUser
-#      local: user_id
-#      type: one
-#      foreignType: one
-#      foreignAlias: ForgotPassword
-#      onDelete: CASCADE
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      type: one
+      foreignType: one
+      foreignAlias: ForgotPassword
+      onDelete: CASCADE

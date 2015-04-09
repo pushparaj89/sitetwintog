@@ -34,13 +34,13 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'               => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'first_name'       => new sfValidatorString(array('max_length' => 255, 'min_length' => 3)),
-      'last_name'        => new sfValidatorString(array('max_length' => 255, 'min_length' => 3)),
-      'email_address'    => new sfValidatorEmail(array('max_length' => 255)),
-      'username'         => new sfValidatorString(array('max_length' => 128, 'min_length' => 3)),
+      'first_name'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'last_name'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'email_address'    => new sfValidatorString(array('max_length' => 255)),
+      'username'         => new sfValidatorString(array('max_length' => 128)),
       'algorithm'        => new sfValidatorString(array('max_length' => 128, 'required' => false)),
       'salt'             => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'password'         => new sfValidatorString(array('max_length' => 128, 'min_length' => 3, 'required' => false)),
+      'password'         => new sfValidatorString(array('max_length' => 128, 'required' => false)),
       'is_active'        => new sfValidatorBoolean(array('required' => false)),
       'is_super_admin'   => new sfValidatorBoolean(array('required' => false)),
       'last_login'       => new sfValidatorDateTime(array('required' => false)),

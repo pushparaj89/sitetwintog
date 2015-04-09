@@ -3,3 +3,12 @@ Gallery:
   columns:
     image_title: {type: string(255)}
     image_url :  {type: string(255)}
+
+
+UserDetails:
+  actAs:
+    Timestampable:
+  columns:
+    name: { type: string(100), notnull: false }
+    email_address: { type: string(255), notblank: true, email: true, unique: true  }
+    message: { type: string(5000), notnull: false }

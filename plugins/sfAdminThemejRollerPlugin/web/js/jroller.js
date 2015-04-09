@@ -106,7 +106,8 @@ jQuery().ready(function(){
 	if ($('.sf_admin_form').length)
 	{
     // tabs for form edition
-    $('#sf_admin_form_tab_menu').tabs().addClass('ui-tabs-vertical ui-helper-clearfix');
+    $('#sf_admin_form_tab_menu').tabs().addClass('ui-tabs-horizontal ui-helper-clearfix');
+    $('#sf_admin_form_tab_menu ul').removeClass('ui-widget-header')
     $('#sf_admin_form_tab_menu li').removeClass('ui-corner-top').addClass('ui-corner-all');
 
     // default size for input

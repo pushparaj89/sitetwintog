@@ -8,13 +8,16 @@
  * @property integer $user_id
  * @property string $unique_key
  * @property timestamp $expires_at
+ * @property sfGuardUser $User
  * 
  * @method integer               getUserId()     Returns the current record's "user_id" value
  * @method string                getUniqueKey()  Returns the current record's "unique_key" value
  * @method timestamp             getExpiresAt()  Returns the current record's "expires_at" value
+ * @method sfGuardUser           getUser()       Returns the current record's "User" value
  * @method sfGuardForgotPassword setUserId()     Sets the current record's "user_id" value
  * @method sfGuardForgotPassword setUniqueKey()  Sets the current record's "unique_key" value
  * @method sfGuardForgotPassword setExpiresAt()  Sets the current record's "expires_at" value
+ * @method sfGuardForgotPassword setUser()       Sets the current record's "User" value
  * 
  * @package    sitetwintog
  * @subpackage model
@@ -48,6 +51,11 @@ abstract class BasesfGuardForgotPassword extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('sfGuardUser as User', array(
+             'local' => 'user_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

@@ -1,5 +1,5 @@
 generator:
-  class: gsaDoctrineGenerator
+  class: sfDoctrineGenerator
   param:
 ##CONFIG##
     # extra: [show, print, export]
@@ -13,4 +13,3 @@ generator:
       edit:    ~
       new:     ~
       show:    ~
-      extra:   ~

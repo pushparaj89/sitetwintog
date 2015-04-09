@@ -2,10 +2,13 @@
 [?php include_partial('<?php echo $this->getModuleName() ?>/assets') ?]
 
 <div id="sf_admin_container">
+  <div class="edit_title">
+    <h1>[?php echo <?php echo $this->getI18NString('list.title') ?> ?]</h1>
+  </div>
   [?php include_partial('<?php echo $this->getModuleName() ?>/flashes') ?]
 
   <div id="sf_admin_header">
-    [?php include_partial('<?php echo $this->getModuleName() ?>/list_header', array('pager' => $pager, 'hasFilters' => $hasFilters, 'form' => $filters, 'configuration' => $configuration)) ?]
+    [?php include_partial('<?php echo $this->getModuleName() ?>/list_header', array('pager' => $pager)) ?]
   </div>
 
   <?php if ($this->configuration->hasFilterForm()): ?>

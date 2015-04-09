@@ -1,11 +1,11 @@
 [?php use_helper('I18N', 'Date') ?]
 [?php include_partial('<?php echo $this->getModuleName() ?>/assets') ?]
 
-<div id="sf_admin_container" class="sf_admin_edit ui-widget ui-widget-content ui-corner-all">
-  <div class="fg-toolbar ui-widget-header ui-corner-all">
+<div id="sf_admin_container" class="sf_admin_edit">
+  <div class="edit_title">
     <h1>[?php echo <?php echo $this->getI18NString('edit.title') ?> ?]</h1>
   </div>
-
+<br/>
   [?php include_partial('<?php echo $this->getModuleName() ?>/flashes') ?]
 
   <div id="sf_admin_header">

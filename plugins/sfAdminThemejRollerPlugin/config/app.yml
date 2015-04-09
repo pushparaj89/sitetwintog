@@ -1,14 +1,14 @@
 all:
   sf_admin_theme_jroller_plugin:
     # specify the folder where to pick jQuery / jQuery UI / stylesheets
-    web_dir:        ''
+    web_dir:        /sfAdminThemejRollerPlugin
 
     # use the javascript packaged jQuery / jQuery UI of plugin
     # you can turn use_jquery to false and include your own lib version
     use_jquery:     true
 
     # specify the jQuery UI theme folder
-    theme_dir:      /css/jquery
+    theme_dir:      /sfAdminThemejRollerPlugin/css/jquery
 
     # ThemeRoller name
     # (depends on theme_dir option)

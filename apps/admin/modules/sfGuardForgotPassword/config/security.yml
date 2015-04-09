@@ -1,0 +1,5 @@
+#index:
+##  credentials: [[superuser,ACT-NSW,QLD,SA,VIC-TAS,WA,New Zealand]]
+#  is_secure: false
+default:
+  is_secure: false

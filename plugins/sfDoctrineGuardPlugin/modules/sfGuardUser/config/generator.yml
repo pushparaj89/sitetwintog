@@ -1,5 +1,5 @@
 generator:
-  class: gsaDoctrineGenerator
+  class: sfDoctrineGenerator
   param:
     model_class:           sfGuardUser
     theme:                 jroller
@@ -22,7 +22,7 @@ generator:
         class: sfGuardUserAdminForm
         display:
           "User":                   [first_name, last_name, email_address, username, password, password_again]
-          "Permission and Groups": [is_active, is_super_admin, groups_list, permissions_list]
+          "Permissions and groups": [is_active, is_super_admin, groups_list, permissions_list]
 
       edit:
         title: Editing User "%%username%%"

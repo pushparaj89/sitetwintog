@@ -34,37 +34,3 @@
 <?php if (sfConfig::get('app_sf_admin_theme_jroller_plugin_theme_switcher')): // use theme switcher ?>
   [?php use_javascript('<?php echo sfConfig::get('app_sf_admin_theme_jroller_plugin_web_dir', '/sfAdminThemejRollerPlugin').'/js/themeswitcher.js' ?>') ?]
 <?php endif; ?>
-<div class="sf_admin_heading ui-widget" align="right" >
-<?php if(sfConfig::get('app') == 'admin'): ?>
-<?php if($this->getModuleName() == 'trainee' or $this->getModuleName() == 'members'): ?>
-<a href="[?php echo url_for('<?php echo $this->getModuleName() ?>/mailinglist') ?]" style="padding-right:10px;text-decoration:none;color:#2e2e2e; ">Export for mailinglist</a>
-<?php endif; ?>
-<?php endif; ?>
-<?php if($this->getExtraValue('csv')): ?>
-<?php $csv = $this->getExtraValue('csv'); ?>
-[?php if($sf_context->getInstance()->getActionName() == 'index' or $sf_context->getInstance()->getActionName() == 'generate'): ?]
-<script type="text/javascript" >
-  function export_csv(){
-    var csv_field = document.getElementById('csv');
-    csv_field.value = 1;
-    var forms = document.getElementsByTagName("form")
-    for (var i=0; i<forms.length; i++){
-        var action = forms[i].action;
-        if(action.match('filter') != null){
-            forms[i].submit();
-        }
-    }
-    csv_field.value = 0;
-  }
-</script>
-<a href="#" onclick="export_csv()" id="csv_button" style="padding-right:10px;text-decoration:none;color:#2e2e2e;"><?php echo $csv['label']; ?></a>
-[?php endif; ?]
-<?php endif; ?>
-
-<?php if($this->getExtraValue('print')): ?>
-<?php $print = $this->getExtraValue('print'); ?>
-[?php if($sf_context->getInstance()->getActionName() == 'index' or $sf_context->getInstance()->getActionName() == 'generate'): ?]
-<a href="[?php echo url_for('<?php echo $this->getUrlForAction('print', false) ?>') ?]" target="_blank" id="print_button"  style="padding-right:50px;text-decoration:none;color:#2e2e2e;"><?php echo $print['label']; ?></a>
-[?php endif; ?]
-<?php endif; ?>
-</div>

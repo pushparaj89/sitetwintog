@@ -1,4 +1,4 @@
-<div id="sf_fieldset_[?php echo preg_replace('/[^a-z0-9_]/', '_', strtolower($fieldset)) ?]" class="[?php if ($count > 1): ?]ui-tabs-hide [?php endif ?]ui-corner-all">
+<div id="sf_fieldset_[?php echo preg_replace('/[^a-z0-9_]/', '_', strtolower($fieldset)) ?]" class="ui-corner-all">
   [?php foreach ($fields as $name => $field): ?]
     [?php if ((isset($form[$name]) && $form[$name]->isHidden()) || (!isset($form[$name]) && $field->isReal())) continue ?]
     [?php include_partial('<?php echo $this->getModuleName() ?>/form_field', array(
