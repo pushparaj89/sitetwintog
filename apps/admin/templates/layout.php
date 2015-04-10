@@ -10,18 +10,7 @@
     <?php include_javascripts() ?>
   </head>
   <body>
-  <div class="topnav">
-      <center>
-          <div id="topnav_content">
-              <?php if($sf_user->isAuthenticated()): ?>
-                  <div class="left_options">TwinTog Admin</div>
-                  <div class="right_options"><?php echo link_to('Sign out', 'sf_guard_signout') ?></div>
-<!--                  <div class="right_options"><a href="--><?php //echo url_for('@user_details') ?><!--" >User List | </a></div>-->
-              <?php endif; ?>
-          </div>
-      </center>
-  </div>
-  <center>
+  <?php include_partial('global/header', array('active' => $sf_context->getModuleName())); ?>
       <div class="content">
           <br/>
           <br/>
