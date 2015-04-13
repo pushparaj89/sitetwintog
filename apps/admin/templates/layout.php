@@ -11,12 +11,13 @@
   </head>
   <body>
   <?php include_partial('global/header', array('active' => $sf_context->getModuleName())); ?>
-      <div class="content">
-          <br/>
-          <br/>
-          <?php echo $sf_content ?>
-      </div>
-  </center>
-    <?php echo $sf_content ?>
+  <table cellpadding="0" cellspacing="0" width="100%" >
+      <tr>
+          <td>
+
+              <?php echo $sf_content ?>
+          </td>
+      </tr>
+  </table>
   </body>
 </html>

@@ -40,16 +40,13 @@
 <div style="background:url('images/ui-bg_glass_80_d7ebf9_1x400.png') repeat-x scroll 50% 50% #D7EBF9; border:1px solid #AED0EA; width:100%; height:24px; float:left; font:normal 11px Arial; border-top:0px;">
      <div id="sf_admin_toolbar_buttons" class="fg-buttonset fg-buttonset-multi ui-state-default" style="float:left; clear:right">
       <a href="<?php echo url_for(array('module'   => 'default', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='home' || $active=='default'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left ui-corner-left"><span class="ui-icon ui-icon-document"></span>Home</a>
-      
-      <a href="<?php echo url_for(array('module'   => 'trainee', 'action'   => 'index')); ?>" class="fg-button <?php if(!$sf_user->getAttribute('archives') && ($active=='trainee' || $active=='requirements' || $active=='logbooks' || $active=='probations' || $active=='minicx' || $active=='dops' || $active=='requests' || $active=='assessments' || $active=='trainee_files' || $active=='seam')):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-refresh"></span>Users</a>
-
     </div>
 
 
 <div style="background:url('/images/ui-bg_inset-soft_50_a0cbe9_1x100.png') repeat-x scroll 50% 50% #A0CBE9; border:1px solid #AED0EA; width:100%; height:24px; float:left; font:normal 11px Arial; border-top:0px;">
      <div id="sf_admin_toolbar_buttons" class="fg-buttonset fg-buttonset-multi ui-state-default" style="float:left; clear:right">
       <a href="<?php echo url_for(array('module'   => 'user_details', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='user_details'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-refresh"></span>User Contact</a>
-      <a href="<?php echo url_for(array('module'   => 'gallery', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='gallery'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-script"></span>Committees</a>
+      <a href="<?php echo url_for(array('module'   => 'gallery', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='gallery'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-script"></span>Gallery</a>
      </div>
 </div>
 <?php endif; ?>
