@@ -1,0 +1,61 @@
+/* 
+    Document   : printable
+    Created on : May 12, 2011, 11:31:51 AM
+    Author     : ali
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+
+.printable {
+
+    padding: 10px 10px 10px 10px ;
+    color: black;
+    border-width: 0;
+    border: 1px solid #000;
+    width: 300pt;
+    float: left;
+
+}
+.printable table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    background: #fff;
+    margin: 25px;
+    width: 680px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.printable th {
+    font-size: 12px;
+    font-weight: normal;
+    color: #039;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+
+.printable th a {
+    text-decoration:none;
+}
+.printable td {
+    border-bottom: 1px solid #ccc;
+    color: #669;
+    padding: 6px 8px;
+}
+
+.printable tbody tr:hover td
+{
+	color: #009;
+}
+
+.printable input {
+    width : 50px;
+    border : 0px;
+}

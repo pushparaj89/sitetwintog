@@ -1,0 +1,44 @@
+
+
+root {
+    display: block;
+}
+body{
+    display: block;
+}
+.gsa_header{
+    display: none;
+}
+/*#breadcrumb{
+    display: none;
+}*/
+/*.breadcrumb-main{
+    display: none;
+}*/
+.sf_admin_actions_block{
+    display: none;
+}
+.sf_admin_actions{
+    display: none;
+}
+#sf_admin_list_batch_actions{
+    display: none;
+}
+.sf_admin_batch_checkbox{
+    display: none;
+}
+.sf_admin_list{
+    display: block;
+}
+.ui-selectmenu-menu{
+    display: none;
+}
+#sf_admin_filters_buttons{
+    display: none;
+}
+#sf_admin_list_th_actions{
+    display: none;
+}
+.sf_admin_td_actions{
+    display: none;
+}

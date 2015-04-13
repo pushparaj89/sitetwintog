@@ -3,7 +3,7 @@
 
 <div id="sf_admin_container">
   <div class="edit_title">
-    <h3><?php echo __('User Contact', array(), 'messages') ?></h3>
+    <h1><?php echo __('User Contact', array(), 'messages') ?></h1>
   </div>
   <?php include_partial('user/flashes') ?>
 

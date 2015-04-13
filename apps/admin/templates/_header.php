@@ -45,7 +45,7 @@
 
 <div style="background:url('/images/ui-bg_inset-soft_50_a0cbe9_1x100.png') repeat-x scroll 50% 50% #A0CBE9; border:1px solid #AED0EA; width:100%; height:24px; float:left; font:normal 11px Arial; border-top:0px;">
      <div id="sf_admin_toolbar_buttons" class="fg-buttonset fg-buttonset-multi ui-state-default" style="float:left; clear:right">
-      <a href="<?php echo url_for(array('module'   => 'user_details', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='user_details'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-refresh"></span>User Contact</a>
+      <a href="<?php echo url_for(array('module'   => 'user', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='user_details'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-refresh"></span>User Contact</a>
       <a href="<?php echo url_for(array('module'   => 'gallery', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='gallery'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-script"></span>Gallery</a>
      </div>
 </div>
