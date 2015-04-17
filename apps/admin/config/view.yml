@@ -12,7 +12,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css, redmond/jquery-ui-1.8.5.custom.css, jquery/jquery.autocompleter.css, breadcrumbs.css, jquery.multiselect.css, layout-admin.css]
+  stylesheets:    [main.css, redmond/jquery-ui-1.8.5.custom.css, jquery/jquery.autocompleter.css, jquery.multiselect.css, layout-admin.css]
 
   javascripts:    [jquery.min.js,bootstrap.min.js,jquery.flexslider.js,jquery.singlePageNav.js,modernizr.js,templatemo_custom.js]
 

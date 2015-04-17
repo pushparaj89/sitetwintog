@@ -12,9 +12,9 @@ class DefaultActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-//    $this->gallerys = Doctrine_Core::getTable('Gallery')
-//      ->createQuery('a')
-//      ->execute();
+    $this->gallerys = Doctrine_Core::getTable('Gallery')
+      ->createQuery('a')
+      ->execute();
   }
 
   public function executeNew(sfWebRequest $request)

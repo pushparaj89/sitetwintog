@@ -5,18 +5,13 @@
         <div class="col col-md-12">
             <div class="flexslider">
                 <ul class="slides">
+                    <?php foreach ($gallerys as $value): ?>
                     <li>
-                        <img src="/images/templatemo_slide_1.jpg" alt="slide 1" />
-                        <p class="flex-caption">Mauris quis sapien sed mauris gravida congue. Fusce convallis felis non lectus facilisis, vel consequat felis dictum.</p>
+                        <img src=<?php echo "/uploads/image_url/".$value->getImageURL(); ?> alt="slide 1" />
+<!--                        <p class="flex-caption">Mauris quis sapien sed mauris gravida congue. Fusce convallis felis non lectus facilisis, vel consequat felis dictum.</p>-->
                     </li>
-                    <li>
-                        <img src="/images/templatemo_slide_2.jpg" alt="slide 2" />
-                        <p class="flex-caption">Proin porttitor urna et enim semper lobortis eu vitae diam. Fusce rutrum consequat dolor. Quisque ante leo, scelerisque nec faucibus.</p>
-                    </li>
-                    <li>
-                        <img src="/images/templatemo_slide_3.jpg" alt="slide 3" />
-                        <p class="flex-caption">Quisque gravida ac nisl nec ultrices. Mauris tincidunt magna vitae feugiat tincidunt. Donec elit arcu, accumsan quis sagittis vitae, porttitor et velit.</p>
-                    </li>
+                    <?php endforeach; ?>
+
                 </ul>
             </div>
         </div>
@@ -159,118 +154,6 @@
                                 <p>PS</p>
                                 <p>70%</p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="portfolio">
-    <div class="outer_container">
-        <div class="container">
-            <div class="row">
-                <div class="col col-md-5 col-sm-12"><h1>Portfolio</h1></div>
-                <div class="col col-md-7 col-sm-12" id="portfolio_content">
-                    <div class="row">
-                        <div class="col col-md-4 col-sm-4 col-xs-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="/images/templatemo_slide_3_sm.jpg" alt="portfolio image 1" class="img-responsive">
-                                    <div class="overlay-p">
-                                        <a href="#">
-                                            <h2>First Title</h2>
-                                            <p>Lorem ipsum dolor sit amet, adipiscing elit. Vivamus elit nec metus pellentesque.</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-4 col-xs-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="/images/templatemo_image_05_sm.jpg" alt="portfolio image 2" class="img-responsive">
-                                    <div class="overlay-p">
-                                        <a href="#">
-                                            <h2>Title Two</h2>
-                                            <p>Donec elit arcu, accumsan quis sagittis vitae, porttitor et velit.</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-4 col-xs-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="/images/templatemo_slide_1_sm.jpg" alt="portfolio image 3" class="img-responsive">
-                                    <div class="overlay-p">
-                                        <a href="#">
-                                            <h2>Third Title</h2>
-                                            <p>Proin porttitor urna et enim semper lobortis eu vitae diam.</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-4 col-xs-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="/images/templatemo_image_06_sm.jpg" alt="portfolio image 4" class="img-responsive">
-                                    <div class="overlay-p">
-                                        <a href="#">
-                                            <h2>Title Four</h2>
-                                            <p>Maecenas semper quis arcu in porta. Donec elit arcu, vitae, porttitor et velit.</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-4 col-xs-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="/images/templatemo_image_07_sm.jpg" alt="portfolio image 5" class="img-responsive">
-                                    <div class="overlay-p">
-                                        <a href="#">
-                                            <h2>Fifth Title</h2>
-                                            <p>Vivamus tempor elit nec metus pellentesque posuere.</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-4 col-xs-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="/images/templatemo_slide_2_sm.jpg" alt="portfolio image 6" class="img-responsive">
-                                    <div class="overlay-p">
-                                        <a href="#">
-                                            <h2>Title Six</h2>
-                                            <p>Vestibulum ac enim.Vestibulum at mollis justo, eu elementum nisi.</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="blog">
-    <div class="outer_container">
-        <div class="container">
-            <div class="row">
-                <div class="col col-md-5 col-md-push-7 col-sm-12"><h1>Blog</h1></div>
-                <div class="col col-md-7 col-md-pull-5 col-sm-12">
-                    <div class="blog_posts_container">
-                        <div class="blog_post">
-                            <h2>22<br>October</h2>
-                            <img src="/images/templatemo_image_05.jpg" alt="Blog Post 1" class="img-responsive">
-                        </div>
-                        <div class="blog_post">
-                            <h2>23<br>October</h2>
-                            <img src="/images/templatemo_image_06.jpg" alt="Blog Post 2" class="img-responsive">
                         </div>
                     </div>
                 </div>
