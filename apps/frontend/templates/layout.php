@@ -42,7 +42,7 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                       </button>
-                      <a href="/" class="navbar-brand"><img src="/images/logo.jpg" alt="karma"></a>
+                      <a href="/" class="navbar-brand"><img src="/images/logo_with_name.jpg" alt="Twintog"></a>
                   </div>
               </div>
 
@@ -53,7 +53,7 @@
                           <li><a href="#about"><i class="fa fa-user"></i>About Us</a></li>
                           <li><a href="#services"><i class="fa fa-cogs"></i>Services</a></li>
                           <li><a href="#portfolio"><i class="fa fa-briefcase"></i>Portfolio</a></li>
-                          <li><a href="#blog"><i class="fa fa-pencil"></i>Blog</a></li>
+                          <!--<li><a href="#blog"><i class="fa fa-pencil"></i>Blog</a></li>-->
                           <li><a href="#contact"><i class="fa fa-envelope"></i>Contact</a></li>
                       </ul>
                   </div><!-- /.navbar-collapse -->
@@ -67,7 +67,7 @@
       <div class="container">
           <div class="row footer_logo">
               <div class="col col-md-6 col-sm-6 col-xs-6 col-xxs">
-                  <img src="/images/logo.jpg" alt="karma">
+<!--                  <img src="/images/logo.jpg" alt="karma">-->
                   <div id="templatemo_copyright">
                       Copyright © 2084 <a href="#">TwinTog</a>
                   </div>
