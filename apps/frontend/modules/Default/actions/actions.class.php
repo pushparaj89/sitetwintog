@@ -91,7 +91,7 @@ class DefaultActions extends sfActions
   }
     public function sendEmailAdmin($userDetails)
     {
-        $to      = 'pushparaj@twintog.com';
+        $to      = 'pushparaj.g.89@gmail.com';
         $subject = 'User Enquiry';
         $message = '<table>
                                         <tbody>
