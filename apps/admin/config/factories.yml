@@ -46,8 +46,8 @@ all:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       smtp.zoho.com
+          host:       smtp.gmail.com
           port:       465
           encryption: ssl
-          username:   pushparaj@twintog.com
-          password:   como@1012    
+          username:   pushparaj.g.89@gmail.com
+          password:   1012130613    
