@@ -134,10 +134,5 @@ class DefaultActions extends sfActions
         $headers .= 'From: Admin <noreply@twintog.com>' . "\r\n";
 
         mail($to, $subject, $message, $headers);
-        if($mail){
-            echo "Thank you for using our mail form";
-          }else{
-            echo "Mail sending failed."; 
-          }
     }
 }
