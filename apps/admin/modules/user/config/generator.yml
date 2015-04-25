@@ -15,7 +15,7 @@ generator:
       actions: ~
       fields:  ~
       list:
-        display: [name, email_address, phone_number,created_at]
+        display: [name, email_address,created_at]
         max_per_page:   10
         batch_actions: {}
         object_actions:        

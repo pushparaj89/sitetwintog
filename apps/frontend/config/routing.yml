@@ -12,5 +12,9 @@ default_index:
   url:   /:module
   param: { action: index }
 
+contact-save-url:
+  url: /contact-save-url
+  param: { module: Default, action: contactSave }  
+
 default:
   url:   /:module/:action/*

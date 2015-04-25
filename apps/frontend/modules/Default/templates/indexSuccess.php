@@ -167,11 +167,11 @@
             <div class="row">
                 <div class="col col-md-5 col-sm-12"><h1>Contact</h1></div>
                 <div class="col col-md-7 col-sm-12 col-xs-12 center-row" id="contact_content">
-                    <form role="form" action="#" method="post" class="center">
+                    <form name="conatct_form" id="contactform" method="post" action="" class="center">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input name="fullname" type="text" class="form-control" id="input_name" placeholder="Name...">
+                                    <input name="name" type="text" class="form-control" id="input_name" placeholder="Name...">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -207,3 +207,53 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    $("#contactform").validate({
+        rules: {
+            name: { required: true },
+            email: {
+                required: true,
+                email: true
+            },
+            phone: {
+                required: true,
+                minlength: 10,
+                number: true
+            }
+        },
+        messages: {
+            name: "Invalid name",
+            email: "Invalid email address",
+        },
+        highlight: function(element) {
+            $(element).parent().addClass("field-error");
+        },
+        unhighlight: function(element) {
+            $(element).parent().removeClass("field-error").addClass("field-success");
+        },
+        submitHandler: function(form) {
+            $.ajax({
+                async: false,
+                data: $("#contactform").serialize(),
+                url : "/frontend_dev.php/Default/contactSave",
+                type: 'POST',
+                success: function (data) {
+                    if(data == "Done") {
+                        document.getElementById("contactform").reset();
+                        $('#ask-success-msg').css('display','block');
+                        $('.field-success').removeClass('field-success');
+//                        $('.thankyou').html('Your message was successfully sent.');
+                        
+                    }
+                },
+                error: function(){
+                    alert('Something went wrong. Please try again.');
+                }
+            });
+        }
+
+    });
+
+</script>

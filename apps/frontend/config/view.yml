@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [main.css,bootstrap.min.css,flexslider.css,font-awesome.min.css,templatemo_style.css]
 
-  javascripts:    [jquery.min.js,bootstrap.min.js,jquery.flexslider.js,jquery.singlePageNav.js,modernizr.js,templatemo_custom.js]
+  javascripts:    [jquery.min.js,bootstrap.min.js,jquery.flexslider.js,jquery.singlePageNav.js,modernizr.js,templatemo_custom.js, jquery.validate.js]
 
   has_layout:     true
   layout:         layout
