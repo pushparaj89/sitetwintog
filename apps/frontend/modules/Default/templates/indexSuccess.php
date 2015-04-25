@@ -167,7 +167,10 @@
             <div class="row">
                 <div class="col col-md-5 col-sm-12"><h1>Contact</h1></div>
                 <div class="col col-md-7 col-sm-12 col-xs-12 center-row" id="contact_content">
+                    
                     <form name="conatct_form" id="contactform" method="post" action="" class="center">
+                        <div class="thankyou"></div>
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -209,7 +212,15 @@
 </section>
 
 <script type="text/javascript">
-
+      function initialize() {
+        var mapOptions = {
+          center: { lat: -34.397, lng: 150.644},
+          zoom: 8
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
     $("#contactform").validate({
         rules: {
             name: { required: true },
@@ -244,7 +255,7 @@
                         document.getElementById("contactform").reset();
                         $('#ask-success-msg').css('display','block');
                         $('.field-success').removeClass('field-success');
-//                        $('.thankyou').html('Your message was successfully sent.');
+                        $('.thankyou').html('Your message was successfully sent.');
                         
                     }
                 },

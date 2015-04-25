@@ -102,6 +102,32 @@
           jQuery('html, body').animate({scrollTop: 0}, 1000);
           return false;
       });
+var map = '';
 
+function initialize() {
+    var mapOptions = {
+      zoom: 14,
+      center: new google.maps.LatLng(13.0827,80.2707)
+    };
+    
+    map = new google.maps.Map(document.getElementById('google_map'),  mapOptions);
+    var myLatlng = new google.maps.LatLng(13.0827,80.2707);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'T!'
+  });
+}
+
+// load google map
+var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+        'callback=initialize';
+    document.body.appendChild(script);
+    
   </script>
+<!--    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
+    </script>-->
 </html>
