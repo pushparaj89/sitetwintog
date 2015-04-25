@@ -81,8 +81,9 @@ class DefaultActions extends sfActions
             $obj->setEmailAddress($email);
             $obj->setMessage($message);
             $obj->save();
+             $this->sendEmailAdmin($obj);
             echo "Done"; 
-            $this->sendEmailAdmin($obj);
+           
         }else{
             echo 'access restricted'; 
         }
