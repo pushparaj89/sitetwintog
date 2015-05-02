@@ -1,3 +1,21 @@
+our_team:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                OurTeam
+    module:               our_team
+    prefix_path:          /our_team
+    column:               id
+    with_wildcard_routes: true
+
+static_content:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                StaticContent
+    module:               static_content
+    prefix_path:          /static_content
+    column:               id
+    with_wildcard_routes: true
+
 user_details:
   class: sfDoctrineRouteCollection
   options:

@@ -15,6 +15,9 @@ class DefaultActions extends sfActions
     $this->gallerys = Doctrine_Core::getTable('Gallery')
       ->createQuery('a')
       ->execute();
+      $this->static_content = Doctrine_Core::getTable('StaticContent')
+          ->createQuery('s')
+          ->execute();
   }
 
   public function executeNew(sfWebRequest $request)

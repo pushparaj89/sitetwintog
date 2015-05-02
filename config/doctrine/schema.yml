@@ -12,3 +12,21 @@ UserDetails:
     name: { type: string(100), notnull: false }
     email_address: { type: string(255), notblank: true, email: true, unique: true  }
     message: { type: string(5000), notnull: false }
+
+StaticContent:
+  actAs: [Timestampable]
+  columns:
+    about_us: {type: string(10000)}
+    about_us_img :  {type: string(255)}
+    services_web: {type: string(5000)}
+    services_seo: {type: string(5000)}
+    services_app: {type: string(5000)}
+
+OurTeam:
+  actAs: [Timestampable]
+  columns:
+    employee_id: {type: string(255)}
+    employee_name :  {type: string(255)}
+    employee_designation: {type: string(255)}
+    employee_img: {type: string(255)}
+    employee_bio: {type: string(10000)}

@@ -1,5 +1,5 @@
 
-
+<?php $staticContent = $sf_data->getRaw('static_content'); ?>
 <div class="container" id="home">
     <div class="row">
         <div class="col col-md-12">
@@ -29,9 +29,11 @@
                             <p>Linda, CEO</p>
                         </div>
                         <div class="col col-md-8 col-sm-12">
-                            <p>Karma is free HTML5 website template with Bootstrap responsive framework. Feel free to use this layout for any website.</p>
-                            <p>Vestibulum ac enim.Vestibulum at mollis justo, eu elementum nisi. Sed consequat odio eget nunc tristique venenatis. Nullam non eros molestie, tristique libero ut, lacinia diam.</p>
-                            <p>Integer hendrerit nibh at aliquam tincidunt. Duis auctor congue arcu eget congue. Vestibulum tristique sollicitudin est, non porttitor est viverra quis.</p>
+<!--                            --><?php //print_r($staticContent); ?>
+                            <p> <?php foreach ($static_content as $value): ?>
+                                    <?php echo nl2br($value->getAboutUs()); ?>
+                                <?php endforeach; ?>
+                            </p>
                         </div>
                     </div>
                 </div>

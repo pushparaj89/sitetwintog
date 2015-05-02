@@ -47,6 +47,8 @@
      <div id="sf_admin_toolbar_buttons" class="fg-buttonset fg-buttonset-multi ui-state-default" style="float:left; clear:right">
       <a href="<?php echo url_for(array('module'   => 'user', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='user_details'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-refresh"></span>User Contact</a>
       <a href="<?php echo url_for(array('module'   => 'gallery', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='gallery'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-script"></span>Gallery</a>
+      <a href="<?php echo url_for(array('module'   => 'our_team', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='gallery'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-script"></span>Our Team</a>
+      <a href="<?php echo url_for(array('module'   => 'static_content', 'action'   => 'index')); ?>" class="fg-button <?php if($active=='gallery'):?>ui-state-active<?php else: ?>ui-state-default<?php endif; ?> fg-button-icon-left"><span class="ui-icon ui-icon-script"></span>Static Content</a>
      </div>
 </div>
 <?php endif; ?>

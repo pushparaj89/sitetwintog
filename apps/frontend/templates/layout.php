@@ -34,7 +34,7 @@
       <div class="container">
           <div class="row">
               <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="col-md-2 col-sm-2 col-xs-12">
+              <div class="col-md-5 col-sm-5 col-xs-12">
                   <div class="navbar-header">
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                           <span class="sr-only">Toggle navigation</span>
@@ -46,7 +46,7 @@
                   </div>
               </div>
 
-              <div class="col-md-10 col-sm-10 col-xs-12">
+              <div class="col-md-7 col-sm-7 col-xs-12">
                   <div class="navbar-collapse collapse menu">
                       <ul class="nav navbar-nav navbar-right">
                           <li><a href="#home"><i class="fa fa-home"></i>Home</a></li>
