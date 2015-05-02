@@ -47,22 +47,21 @@
             <div class="row">
                 <div class="col col-md-5 col-md-push-7 col-sm-12"><h1>Our Team</h1></div>
                 <div class="col col-md-7 col-md-pull-5 col-sm-12 center-row" id="team_content">
-                    <div class="row center">
-                        <div class="col col-md-4 col-sm-4 col-xs-4">
-                            <img src="/images/templatemo_image_01.jpg" alt="Nancy" class="img-circle img-responsive">
-                            <p>Nancy</p>
-                            <p>Manager</p>
-                        </div>
-                        <div class="col col-md-4 col-sm-4 col-xs-4">
-                            <img src="/images/templatemo_image_03.jpg" alt="Mary" class="img-circle img-responsive">
-                            <p>Mary</p>
-                            <p>Designer</p>
-                        </div>
-                        <div class="col col-md-4 col-sm-4 col-xs-4">
-                            <img src="/images/templatemo_image_04.jpg" alt="Helen" class="img-circle img-responsive">
-                            <p>Helen</p>
-                            <p>Artist</p>
-                        </div>
+                    <div class="row center team_flexslider" >
+                        <ul class="slides">
+                            <?php foreach ($our_team as $value): ?>
+                                <li>
+                                    <div class="col col-md-4 col-sm-4 col-xs-4">
+                                        <img src=<?php echo "/uploads/image_url/".$value->getEmployeeImg(); ?> width="170px" height="170px" alt="Nancy" class="img-circle img-responsive">
+                                        <p><?php echo $value->getEmployeeName() ?></p>
+                                        <p><?php echo $value->getEmployeeDesignation() ?></p>
+                                    </div>
+                                    <div class="col col-md-8 col-sm-8 col-xs-8">
+                                        <p><?php echo nl2br($value->getEmployeeBio()); ?></p>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
                 </div>
             </div>

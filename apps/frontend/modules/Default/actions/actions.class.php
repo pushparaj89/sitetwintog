@@ -18,6 +18,9 @@ class DefaultActions extends sfActions
       $this->static_content = Doctrine_Core::getTable('StaticContent')
           ->createQuery('s')
           ->execute();
+      $this->our_team = Doctrine_Core::getTable('OurTeam')
+          ->createQuery('s')
+          ->execute();
   }
 
   public function executeNew(sfWebRequest $request)

@@ -202,3 +202,41 @@ img.edit_photo
     background-color: #dff0d8;
     padding-left: 18px;
 }
+
+.flex-control-nav {
+    /*background: none repeat scroll 0 0 #FFFFFF;*/
+    bottom: 0px !important;
+    display: block !important;
+    opacity: 0.66 !important;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    top: auto !important;
+    width: 100%;
+    z-index: 999 !important;
+}
+
+.flex-direction-nav {
+    display: block !important;
+    opacity: 1 !important;
+    top: 30% !important;
+    width: 100%;
+    z-index: 999 !important;
+}
+
+.flex-direction-nav a {
+    color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-top: 8px;
+    position: absolute;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+    top: 50%;
+    transition: all 0.3s ease 0s;
+    width: 40px;
+    z-index: 10;
+}

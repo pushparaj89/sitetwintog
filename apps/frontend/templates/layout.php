@@ -88,6 +88,18 @@
   <script type="text/javascript">
 
       $(window).load(function(){
+          $('.team_flexslider').flexslider({
+              animation: "slide",
+              animationLoop: true,
+//              itemWidth: 170,
+//              itemMargin: 2,
+              pausePlay: true,
+              minItems: 2,
+              slideshowSpeed: 6000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
+              animationSpeed: 600,
+              directionNav: true
+
+          });
           $('.flexslider').flexslider({
               animation: "slide",
               start: function(slider){
