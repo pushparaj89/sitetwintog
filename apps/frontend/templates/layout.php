@@ -42,7 +42,7 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                       </button>
-                      <a href="/" class="navbar-brand"><img src="/images/logo_with_name.jpg" alt="Twintog"></a>
+                      <a href="/" class="navbar-brand" style="padding: 0px !important;"><img src="/images/logo_with_name.jpg" alt="Twintog"></a>
                   </div>
               </div>
 
