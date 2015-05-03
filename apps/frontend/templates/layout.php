@@ -49,12 +49,12 @@
               <div class="col-md-7 col-sm-7 col-xs-12">
                   <div class="navbar-collapse collapse menu">
                       <ul class="nav navbar-nav navbar-right">
-                          <li><a href="#home"><i class="fa fa-home"></i>Home</a></li>
-                          <li><a href="#about"><i class="fa fa-user"></i>About Us</a></li>
-                          <li><a href="#services"><i class="fa fa-cogs"></i>Services</a></li>
-                          <li><a href="#portfolio"><i class="fa fa-briefcase"></i>Portfolio</a></li>
+                          <li style="background-color: rgb(83, 160, 11);"><a href="#home"><i class="fa fa-home"></i>Home</a></li>
+                          <li style="background-color: rgb(83, 160, 11);"><a href="#about"><i class="fa fa-user"></i>About Us</a></li>
+                          <li style="background-color: rgb(83, 160, 11);"><a href="#services"><i class="fa fa-cogs"></i>Services</a></li>
+                          <li style="background-color: rgb(83, 160, 11);"><a href="#skills"><i class="fa fa-briefcase"></i>skills</a></li>
                           <!--<li><a href="#blog"><i class="fa fa-pencil"></i>Blog</a></li>-->
-                          <li><a href="#contact"><i class="fa fa-envelope"></i>Contact</a></li>
+                          <li style="background-color: rgb(83, 160, 11);"><a href="#contact"><i class="fa fa-envelope"></i>Contact</a></li>
                       </ul>
                   </div><!-- /.navbar-collapse -->
               </div>
@@ -63,6 +63,7 @@
   </nav>
     <?php echo $sf_content ?>
   </body>
+  <div id="go-top" class="back_to_top"><strong>Back To Top</strong></div>
   <footer>
       <div class="container">
           <div class="row footer_logo">
@@ -79,7 +80,7 @@
                           <a href="#" rel="nofollow" class="icon-button twitter"><i class="fa fa-twitter"></i></a>
                           <a href="#" rel="nofollow" class="icon-button youtube"><i class="fa fa-youtube"></i></a>
                       </div>
-                      <a href="#" id="go-top"><div class="back_to_top">Back To Top</div></a>
+
                   </div>
               </div>
           </div>

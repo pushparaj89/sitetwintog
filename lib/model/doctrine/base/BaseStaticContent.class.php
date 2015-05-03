@@ -7,20 +7,23 @@
  * 
  * @property string $about_us
  * @property string $about_us_img
+ * @property string $about_us_img_content
  * @property string $services_web
  * @property string $services_seo
  * @property string $services_app
  * 
- * @method string        getAboutUs()      Returns the current record's "about_us" value
- * @method string        getAboutUsImg()   Returns the current record's "about_us_img" value
- * @method string        getServicesWeb()  Returns the current record's "services_web" value
- * @method string        getServicesSeo()  Returns the current record's "services_seo" value
- * @method string        getServicesApp()  Returns the current record's "services_app" value
- * @method StaticContent setAboutUs()      Sets the current record's "about_us" value
- * @method StaticContent setAboutUsImg()   Sets the current record's "about_us_img" value
- * @method StaticContent setServicesWeb()  Sets the current record's "services_web" value
- * @method StaticContent setServicesSeo()  Sets the current record's "services_seo" value
- * @method StaticContent setServicesApp()  Sets the current record's "services_app" value
+ * @method string        getAboutUs()              Returns the current record's "about_us" value
+ * @method string        getAboutUsImg()           Returns the current record's "about_us_img" value
+ * @method string        getAboutUsImgContent()    Returns the current record's "about_us_img_content" value
+ * @method string        getServicesWeb()          Returns the current record's "services_web" value
+ * @method string        getServicesSeo()          Returns the current record's "services_seo" value
+ * @method string        getServicesApp()          Returns the current record's "services_app" value
+ * @method StaticContent setAboutUs()              Sets the current record's "about_us" value
+ * @method StaticContent setAboutUsImg()           Sets the current record's "about_us_img" value
+ * @method StaticContent setAboutUsImgContent()    Sets the current record's "about_us_img_content" value
+ * @method StaticContent setServicesWeb()          Sets the current record's "services_web" value
+ * @method StaticContent setServicesSeo()          Sets the current record's "services_seo" value
+ * @method StaticContent setServicesApp()          Sets the current record's "services_app" value
  * 
  * @package    sitetwintog
  * @subpackage model
@@ -37,6 +40,10 @@ abstract class BaseStaticContent extends sfDoctrineRecord
              'length' => 10000,
              ));
         $this->hasColumn('about_us_img', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             ));
+        $this->hasColumn('about_us_img_content', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              ));

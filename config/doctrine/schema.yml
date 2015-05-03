@@ -18,6 +18,7 @@ StaticContent:
   columns:
     about_us: {type: string(10000)}
     about_us_img :  {type: string(255)}
+    about_us_img_content :  {type: string(255)}
     services_web: {type: string(5000)}
     services_seo: {type: string(5000)}
     services_app: {type: string(5000)}

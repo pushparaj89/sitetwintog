@@ -37,9 +37,9 @@ section h1 { text-transform: uppercase; color: white; margin-top: 0px; margin-bo
 --------------------------------------------------------*/
 nav { font-size: 1.2em; font-weight: lighter; }
 nav .fa { display: block; text-align: center; margin-bottom: 13px; }
-
+/*#283147;*/
 .navbar {
-	background: #283147;
+	background: #F6F7FC;
 	min-height: 85px;	
 	border-radius: 0px; 
 	border: none; 
@@ -63,10 +63,10 @@ nav .fa { display: block; text-align: center; margin-bottom: 13px; }
 	-webkit-transition: background-color .5s ease;
 	transition: background-color .5s ease;
 }
-
+/*#394665*/
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, .menu ul li a.current {
 	color: white;
-	background-color: #394665;
+	background-color: #136E30;
 }
 
 .navbar>.container .navbar-brand { margin-left: 0; }
@@ -224,16 +224,19 @@ nav .fa { display: block; text-align: center; margin-bottom: 13px; }
 #google_map { width: 100%; height: 280px; outline: 0; border: 0; }
 
 /*------------------------------------------------------
-	FOOTER 
+	FOOTER #283147;
 --------------------------------------------------------*/
-footer { background: #283147; min-height: 141px; color: white; margin-top: 20px; }
+footer { background: rgb(83, 160, 11); height: 83px; color: white; margin-top: 20px; }
 footer img { padding-top: 30px; }
 footer a { text-decoration: none; color: white; }
 footer a:hover { color: #cbcbcb; text-decoration: none; }
 footer .row { height: 100%; }
-
-.back_to_top { background-color: #c5454a; text-align: center; height: 41px; line-height: 41px; } /*http://stackoverflow.com/questions/2939914/vertically-align-text-in-a-div*/
-
+/*##c5454a*/
+.back_to_top { background-color: #F5F9F8; text-align: center; height: 41px; line-height: 41px;  margin-bottom: -20px; } /*http://stackoverflow.com/questions/2939914/vertically-align-text-in-a-div*/
+.back_to_top a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
 .social_buttons a {	text-decoration: none; }
 
 #templatemo_copyright { font-size: .9em; }
@@ -370,8 +373,9 @@ footer .row { height: 100%; }
 /* http://codepen.io/minimalmonkey/pen/Ecpla */
 
 /* Wrapper */
+/*#20283e*/
 .social_buttons .icon-button {
-	background-color: #20283e;
+	background-color: #136E30;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 2.0rem;
@@ -384,7 +388,7 @@ footer .row { height: 100%; }
 	    -ms-user-select: none;
 	        user-select: none;
 	width: 60px;
-	height: 100px;
+	height: 83px;
 }
 
 /* Icons */
